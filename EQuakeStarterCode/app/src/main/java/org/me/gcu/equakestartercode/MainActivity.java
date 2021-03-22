@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                     int r = rand.nextInt(earthquakes.length - 1);
 
                     Earthquake earthquake = earthquakes[r];
+
                     eqView.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
                     eqLocation.setText("Location: " + earthquake.getLocation());
                     eqMagnitude.setText("Magnitude: " + earthquake.getMagnitude());
