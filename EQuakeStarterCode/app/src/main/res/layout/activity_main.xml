@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  MPD XML Starter code Semester B Session 2018 2019  -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:id="@+id/salutation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Welcome to Mobile Platform Development"/>
+        <Button android:id="@+id/startButton" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Press to get data"/>
+        <TextView android:id="@+id/acknowledgement" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Contains British Geological Survey materials ©NERC 2019"/>
+        <LinearLayout android:id="@+id/eqView" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:id="@+id/eqLocation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Location"/>
+            <TextView android:id="@+id/eqMagnitude" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Magnitude"/>
+            <TextView android:id="@+id/eqDateTime" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Date and Time"/>
+            <TextView android:id="@+id/eqLatLong" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Latitude and Longitude"/>
+            <TextView android:id="@+id/eqDepth" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Depth"/>
+        </LinearLayout>
+        <Button android:id="@+id/mapButton" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Earthquakes Map"/>
+    </LinearLayout>
+</ScrollView>
