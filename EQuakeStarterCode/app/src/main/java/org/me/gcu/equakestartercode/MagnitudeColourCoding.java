@@ -10,11 +10,11 @@ public class MagnitudeColourCoding
     public static float maxRange = 4f;
 
     private static String[] colours = new String[] {
-            "#fef5ff", "#ff6145", "#3700B3"
+            "#fef5ff", "#fffe97", "#e7aa40", "#c31c1c", "#78050d", "#56018a"
     };
 
     private static float[] times = new float[] {
-            0f, 0.3f, 1f
+            0f, 0.2f, 0.4f, 0.6f, 0.8f, 1f
     };
 
     public static String getColour(float magnitude) {
@@ -27,6 +27,7 @@ public class MagnitudeColourCoding
                 int[] rgb2 = hexToRgb(colours[i + 1]);
                 Log.d("Colours", "rgb2: " + rgb2[0] + ", " + rgb2[1] + ", " + rgb2[2]);
                 int[] lerpedColour = lerpColour(rgb1[0], rgb1[1], rgb1[2], rgb2[0], rgb2[1], rgb2[2], (magNormalised - times[i]) / (times[i + 1] - times[i]));
+                Log.d("Colours", rgbToHex(lerpedColour[0], lerpedColour[1], lerpedColour[2]));
                 return rgbToHex(lerpedColour[0], lerpedColour[1], lerpedColour[2]);
             }
         }
