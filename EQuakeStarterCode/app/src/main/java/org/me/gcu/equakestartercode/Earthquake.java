@@ -57,6 +57,7 @@ public class Earthquake
     public String getMonth() {
         return month.toString();
     }
+    public int getMonthValue() { return month.ordinal() + 1; }
     public void setMonth(String month) {
         this.month = Month.getMonth(month);
     }
@@ -124,11 +125,11 @@ public class Earthquake
         return day + ordinal + " of " + month + " " + year;
     }
 
-    public static Earthquake[] sort(Earthquake[] earthquakeArray) {
+    public static Earthquake[] sort(Earthquake[] earthquakeArray, SortMode sortMode) {
         boolean isSorted = false;
         while (!isSorted) {
             for (int i = 0; i < earthquakeArray.length - 1; i++) {
-                if (earthquakeArray[i].getMagnitude() > earthquakeArray[i + 1].getMagnitude()) {
+                if (compareForSorting(earthquakeArray[i], earthquakeArray[i + 1], sortMode)) {
                     Earthquake swap = earthquakeArray[i];
                     earthquakeArray[i] = earthquakeArray[i + 1];
                     earthquakeArray[i + 1] = swap;
@@ -141,5 +142,56 @@ public class Earthquake
             }
         }
         return earthquakeArray;
+    }
+
+    private static boolean compareForSorting(Earthquake eq1, Earthquake eq2, SortMode sortMode) {
+        switch (sortMode) {
+            case MAGNITUDE_ASCENDING:
+                return eq1.getMagnitude() > eq2.getMagnitude();
+            case MAGNITUDE_DESCENDING:
+                return eq1.getMagnitude() < eq2.getMagnitude();
+            case DATE_ASCENDING:
+                return compareDates(eq1, eq2);
+            case DATE_DESCENDING:
+                return compareDates(eq2, eq1);
+            case ALPHABETICAL_ASCENDING:
+                return eq1.getLocation().compareToIgnoreCase(eq2.getLocation()) < 0;
+            case ALPHABETICAL_DESCENDING:
+                return eq2.getLocation().compareToIgnoreCase(eq1.getLocation()) < 0;
+            case DEPTH_ASCENDING:
+                return eq1.getDepth() > eq2.getDepth();
+            case DEPTH_DESCENDING:
+                return eq1.getDepth() < eq2.getDepth();
+        }
+        return false;
+    }
+
+    private static boolean compareDates(Earthquake eq1, Earthquake eq2) {
+        if (eq1.getYear() == eq2.getYear())
+            return eq1.getYear() > eq2.getYear();
+        else {
+            if (eq1.getMonthValue() == eq2.getMonthValue())
+                return eq1.getMonthValue() > eq2.getMonthValue();
+            else {
+                if (eq1.getDay() == eq2.getDay())
+                    return eq1.getDay() > eq2.getDay();
+                else {
+                    String[] time1 = eq1.getTime().split(":");
+                    String[] time2 = eq2.getTime().split(":");
+                    if (Integer.parseInt(time1[0]) == Integer.parseInt(time2[0]))
+                        return Integer.parseInt(time1[0]) > Integer.parseInt(time2[0]);
+                    else {
+                        if (Integer.parseInt(time1[1]) == Integer.parseInt(time2[1]))
+                            return Integer.parseInt(time1[1]) > Integer.parseInt(time2[1]);
+                        else {
+                            if (Integer.parseInt(time1[2]) == Integer.parseInt(time2[2]))
+                                return Integer.parseInt(time1[2]) > Integer.parseInt(time2[2]);
+                            else
+                                return false;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

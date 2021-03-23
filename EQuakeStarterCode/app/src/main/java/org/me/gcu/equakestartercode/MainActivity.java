@@ -3,6 +3,7 @@ package org.me.gcu.equakestartercode;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 public void run() {
                     Log.d("UI thread", "I am the UI thread");
 
-                    earthquakes = Earthquake.sort(earthquakes);
+                    earthquakes = Earthquake.sort(earthquakes, SortMode.MAGNITUDE_DESCENDING);
 
                     /*
                     eqView.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
