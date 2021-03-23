@@ -2,8 +2,6 @@ package org.me.gcu.equakestartercode;
 
 import android.util.Log;
 
-import java.util.Dictionary;
-
 public class MagnitudeColourCoding
 {
     public static float minRange = 0f;
@@ -18,16 +16,16 @@ public class MagnitudeColourCoding
     };
 
     public static String getColour(float magnitude) {
-        Log.d("Colours", "Mag: " + magnitude);
+        //Log.d("Colours", "Mag: " + magnitude);
         float magNormalised = (magnitude - minRange) / (maxRange - minRange);
         for (int i = times.length - 1; i >= 0; i--) {
             if (magNormalised >= times[i]) {
                 int[] rgb1 = hexToRgb(colours[i]);
-                Log.d("Colours", "rgb1: " + rgb1[0] + ", " + rgb1[1] + ", " + rgb1[2]);
+                //Log.d("Colours", "rgb1: " + rgb1[0] + ", " + rgb1[1] + ", " + rgb1[2]);
                 int[] rgb2 = hexToRgb(colours[i + 1]);
-                Log.d("Colours", "rgb2: " + rgb2[0] + ", " + rgb2[1] + ", " + rgb2[2]);
+                //Log.d("Colours", "rgb2: " + rgb2[0] + ", " + rgb2[1] + ", " + rgb2[2]);
                 int[] lerpedColour = lerpColour(rgb1[0], rgb1[1], rgb1[2], rgb2[0], rgb2[1], rgb2[2], (magNormalised - times[i]) / (times[i + 1] - times[i]));
-                Log.d("Colours", rgbToHex(lerpedColour[0], lerpedColour[1], lerpedColour[2]));
+                //Log.d("Colours", rgbToHex(lerpedColour[0], lerpedColour[1], lerpedColour[2]));
                 return rgbToHex(lerpedColour[0], lerpedColour[1], lerpedColour[2]);
             }
         }

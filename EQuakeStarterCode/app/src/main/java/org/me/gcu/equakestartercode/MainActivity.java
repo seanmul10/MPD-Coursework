@@ -3,6 +3,8 @@ package org.me.gcu.equakestartercode;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,17 +32,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener
 {
-    private LinearLayout eqView;
-    private TextView eqLocation;
-    private TextView eqMagnitude;
-    private TextView eqDateTime;
-    private TextView eqLatLong;
-    private TextView eqDepth;
-    private Button startButton;
-    private String url1="";
-    private String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
-
     public static Earthquake[] earthquakes;
+
+    private RecyclerView recyclerView;
+
+    private Button startButton;
+    private String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
 
     private Button mapButton;
 
@@ -51,12 +48,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
         setContentView(R.layout.activity_main);
         Log.e("MyTag","in onCreate");
         // Set up the raw links to the graphical components
-        eqView = (LinearLayout)findViewById(R.id.eqView);
-        eqLocation = (TextView)findViewById(R.id.eqLocation);
-        eqMagnitude = (TextView)findViewById(R.id.eqMagnitude);
-        eqDateTime = (TextView)findViewById(R.id.eqDateTime);
-        eqLatLong = (TextView)findViewById(R.id.eqLatLong);
-        eqDepth = (TextView)findViewById(R.id.eqDepth);
+        recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
+
 
         startButton = (Button)findViewById(R.id.startButton);
         startButton.setOnClickListener(this);
@@ -174,12 +167,17 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
 
                     Earthquake earthquake = earthquakes[r];
 
+                    /*
                     eqView.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
                     eqLocation.setText("Location: " + earthquake.getLocation());
                     eqMagnitude.setText("Magnitude: " + earthquake.getMagnitude());
                     eqDateTime.setText("Occurred on: " + earthquake.getDate() + " at " + earthquake.getTime());
                     eqLatLong.setText("LatLng: " + earthquake.getLatitude() + ", " + earthquake.getLongitude());
                     eqDepth.setText("Depth: " + earthquake.getDepth() + "km");
+                     */
+                    RecyclerAdapter adapter = new RecyclerAdapter(earthquakes);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 }
             });
         }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:id="@+id/eqFrameLayout">
+    <TextView android:id="@+id/eqLocation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Location"/>
+    <!--<TextView android:id="@+id/eqMagnitude" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Magnitude"/>
+    <TextView android:id="@+id/eqDateTime" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Date and Time"/>-->
+</FrameLayout>
