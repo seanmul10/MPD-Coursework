@@ -10,7 +10,7 @@
         <Button android:id="@+id/startButton" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Press to get data"/>
         <TextView android:id="@+id/acknowledgement" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Contains British Geological Survey materials ©NERC 2019"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="300dp"
             android:id="@+id/eqRecyclerView">
         </androidx.recyclerview.widget.RecyclerView>
