@@ -41,7 +41,10 @@ public class MagnitudeColourCoding
             Log.e("Colours", "Invalid RGB colour. RGB values must be in the range 0-255.");
             return null;
         }
-        return "#" + Integer.toHexString(r) + Integer.toHexString(g) + Integer.toHexString(b);
+        String red = (r > 15 ? "" : "0") + Integer.toHexString(r);
+        String green = (g > 15 ? "" : "0") + Integer.toHexString(g);
+        String blue = (b > 15 ? "" : "0") + Integer.toHexString(b);
+        return "#" + red + green + blue;
     }
 
     public static int[] hexToRgb(String hex) {
