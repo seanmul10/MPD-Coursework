@@ -1,5 +1,7 @@
 package org.me.gcu.equakestartercode;
 
+import android.util.Log;
+
 public class Earthquake
 {
     private String location;
@@ -120,5 +122,24 @@ public class Earthquake
                 break;
         }
         return day + ordinal + " of " + month + " " + year;
+    }
+
+    public static Earthquake[] sort(Earthquake[] earthquakeArray) {
+        boolean isSorted = false;
+        while (!isSorted) {
+            for (int i = 0; i < earthquakeArray.length - 1; i++) {
+                if (earthquakeArray[i].getMagnitude() > earthquakeArray[i + 1].getMagnitude()) {
+                    Earthquake swap = earthquakeArray[i];
+                    earthquakeArray[i] = earthquakeArray[i + 1];
+                    earthquakeArray[i + 1] = swap;
+                    Log.d("Sorting", "Swapped elements at positions: " + i + " & " + (i + 1));
+                    break;
+                }
+                if (i == earthquakeArray.length - 2) {
+                    isSorted = true;
+                }
+            }
+        }
+        return earthquakeArray;
     }
 }

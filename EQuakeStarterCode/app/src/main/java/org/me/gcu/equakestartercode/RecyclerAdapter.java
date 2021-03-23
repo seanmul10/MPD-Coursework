@@ -1,5 +1,6 @@
 package org.me.gcu.equakestartercode;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getEqLocation().setText(earthquakes[position].getLocation());
+        Earthquake earthquake = earthquakes[position];
+        viewHolder.getEqLocation().setText(earthquake.getLocation());
+        //viewHolder.getEqMagnitude().setText(Float.toString(earthquake.getMagnitude()));
+        viewHolder.getEqFrameLayout().setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

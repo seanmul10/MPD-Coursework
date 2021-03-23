@@ -161,11 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 public void run() {
                     Log.d("UI thread", "I am the UI thread");
 
-                    // Delete randomness
-                    Random rand = new Random();
-                    int r = rand.nextInt(earthquakes.length - 1);
-
-                    Earthquake earthquake = earthquakes[r];
+                    earthquakes = Earthquake.sort(earthquakes);
 
                     /*
                     eqView.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));

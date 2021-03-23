@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:id="@+id/eqFrameLayout">
-    <TextView android:id="@+id/eqLocation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Location"/>
-    <!--<TextView android:id="@+id/eqMagnitude" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Magnitude"/>
+    android:id="@+id/eqFrameLayout"
+    android:orientation="vertical">
+    <TextView android:id="@+id/eqLocation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Location" android:textColor="@color/black"/>
+    <!--TextView android:id="@+id/eqMagnitude" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Magnitude" android:textColor="@color/black"/>
     <TextView android:id="@+id/eqDateTime" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Date and Time"/>-->
 </FrameLayout>
