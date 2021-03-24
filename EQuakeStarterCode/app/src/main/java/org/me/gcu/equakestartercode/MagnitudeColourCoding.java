@@ -9,13 +9,15 @@ public class MagnitudeColourCoding
 
     // Colour values for the colour gradient used to colour code earthquakes by magnitude
     private static String[] colours = new String[] {
-            "#fef5ff", "#fffe97", "#e7aa40", "#c31c1c", "#78050d", "#56018a"
+            //"#fef5ff", "#fffe97", "#e7aa40", "#c31c1c", "#78050d", "#56018a"
+            "#ffffff", "#deffd1", "#feffba", "#ffc7b2", "#ff8282"
     };
 
     // Time values for the colour gradient used to colour code earthquakes by magnitude
-    // First and last entries should always be 0f and 1f
+    // First and last entries should always be 0f and 1f and there should be the same number of time values as colour values
     private static float[] times = new float[] {
-            0f, 0.2f, 0.4f, 0.6f, 0.8f, 1f
+            //0f, .2f, .4f, .6f, .8f, 1f
+            0f, .15f, .3f, .6f, 1f
     };
 
     // Returns a colour by passing in a magnitude and getting the corresponding colour from a colour gradient

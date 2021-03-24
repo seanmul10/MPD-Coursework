@@ -29,20 +29,34 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="fill_parent"
         android:layout_height="300dp"
-        android:id="@+id/eqRecyclerView">
+        android:id="@+id/eqRecyclerView"
+        android:layout_weight="1">
     </androidx.recyclerview.widget.RecyclerView>
 
     <TextView android:id="@+id/buildDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="14dp" android:text="Data accurate as of: "/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/listViewButton"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="List"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/dateRangeButton"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Search in Range"
+            android:layout_weight="1"/>
         <Button
             android:id="@+id/mapButton"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Earthquakes Map" />
-    </RelativeLayout>
+            android:layout_height="fill_parent"
+            android:text="Map"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </LinearLayout>
