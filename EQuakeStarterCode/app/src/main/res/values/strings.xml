@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">EQuakeStarterCode</string>
+    <string-array name="sort_modes">
+        <item>By date (Descending)</item>
+        <item>By date (Ascending)</item>
+        <item>By magnitude (Descending)</item>
+        <item>By magnitude (Ascending)</item>
+        <item>Alphabetical order (Descending)</item>
+        <item>Alphabetical order (Ascending)</item>
+        <item>By depth (Descending)</item>
+        <item>By depth (Ascending)</item>
+    </string-array>
 </resources>

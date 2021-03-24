@@ -14,8 +14,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -31,15 +34,17 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener
+public class MainActivity extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener
 {
     public static Earthquake[] earthquakes;
 
     private RecyclerView recyclerView;
 
-    private Button startButton;
     private String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
 
+    private Spinner sortSpinner;
+
+    private Button refreshButton;
     private Button mapButton;
 
     @Override
@@ -47,15 +52,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("MyTag","in onCreate");
+
         // Set up the raw links to the graphical components
         recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
 
+        sortSpinner = (Spinner)findViewById(R.id.sortSpinner);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.sort_modes, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortSpinner.setAdapter(spinnerAdapter);
+        sortSpinner.setOnItemSelectedListener(this);
 
-        startButton = (Button)findViewById(R.id.startButton);
-        startButton.setOnClickListener(this);
-        Log.e("MyTag","after startButton");
-        // More Code goes here
+        refreshButton = (Button)findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(this);
+
         mapButton = (Button)findViewById(R.id.mapButton);
         mapButton.setOnClickListener(this);
 
@@ -64,7 +73,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
 
     public void onClick(View view)
     {
-        if (view == startButton) {
+        if (view == refreshButton) {
+            recyclerView.setAdapter(null);
             startProgress();
         }
         if (view == mapButton) {
@@ -100,17 +110,62 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
     {
         // Run network access on a separate thread;
         new Thread(new Task(urlSource)).start();
-    } //
+    }
+
+    public void startProgress(SortMode sortMode)
+    {
+        // Run network access on a separate thread;
+        new Thread(new Task(urlSource, sortMode)).start();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                startProgress(SortMode.DATE_DESCENDING);
+                break;
+            case 1:
+                startProgress(SortMode.DATE_ASCENDING);
+                break;
+            case 2:
+                startProgress(SortMode.MAGNITUDE_DESCENDING);
+                break;
+            case 3:
+                startProgress(SortMode.MAGNITUDE_ASCENDING);
+                break;
+            case 4:
+                startProgress(SortMode.ALPHABETICAL_DESCENDING);
+                break;
+            case 5:
+                startProgress(SortMode.ALPHABETICAL_ASCENDING);
+                break;
+            case 6:
+                startProgress(SortMode.DEPTH_DESCENDING);
+                break;
+            case 7:
+                startProgress(SortMode.DEPTH_ASCENDING);
+                break;
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) { }
 
     // Need separate thread to access the internet resource over network
     // Other neater solutions should be adopted in later iterations.
     private class Task implements Runnable
     {
         private String url;
+        private SortMode sortMode;
 
-        public Task(String aurl)
+        public Task(String url)
         {
-            url = aurl;
+            this.url = url;
+            this.sortMode = SortMode.DATE_DESCENDING;
+        }
+        public Task(String url, SortMode sortMode)
+        {
+            this.url = url;
+            this.sortMode = sortMode;
         }
         @Override
         public void run()
@@ -162,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 public void run() {
                     Log.d("UI thread", "I am the UI thread");
 
-                    earthquakes = Earthquake.sort(earthquakes, SortMode.MAGNITUDE_DESCENDING);
+                    earthquakes = Earthquake.sort(earthquakes, sortMode);
 
                     /*
                     eqView.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
