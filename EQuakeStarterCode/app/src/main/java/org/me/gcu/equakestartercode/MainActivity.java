@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     private String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
     //private String urlSource="http://quakes.bgs.ac.uk/feeds/WorldSeismology.xml";
+
     private Spinner sortSpinner;
 
     private Button refreshButton;
@@ -112,18 +113,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         }
     }
 
+    // Standard method used to get and display earthquake data, sorts the data by date descending by default
     public void startProgress()
     {
-        // Run network access on a separate thread;
-        new Thread(new Task(urlSource)).start();
+        startProgress(SortMode.DATE_DESCENDING);
     }
 
+    // Gets and displays the earthquake data and sorts it using the specified sort mode
     public void startProgress(SortMode sortMode)
     {
         // Run network access on a separate thread;
         new Thread(new Task(urlSource, sortMode)).start();
     }
 
+    // Called when a new sort mode has been clicked in the spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         SortMode sortMode = SortMode.getSortMode(position);
@@ -139,11 +142,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         private String url;
         private SortMode sortMode;
 
-        public Task(String url)
-        {
-            this.url = url;
-            this.sortMode = SortMode.DATE_DESCENDING;
-        }
         public Task(String url, SortMode sortMode)
         {
             this.url = url;

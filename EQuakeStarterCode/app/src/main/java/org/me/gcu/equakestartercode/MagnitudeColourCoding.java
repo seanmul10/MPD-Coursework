@@ -7,19 +7,29 @@ public class MagnitudeColourCoding
     public static float minRange = 0f;
     public static float maxRange = 4f;
 
+    // Colour values for the colour gradient used to colour code earthquakes by magnitude
     private static String[] colours = new String[] {
             "#fef5ff", "#fffe97", "#e7aa40", "#c31c1c", "#78050d", "#56018a"
     };
 
+    // Time values for the colour gradient used to colour code earthquakes by magnitude
+    // First and last entries should always be 0f and 1f
     private static float[] times = new float[] {
             0f, 0.2f, 0.4f, 0.6f, 0.8f, 1f
     };
 
+    // Returns a colour by passing in a magnitude and getting the corresponding colour from a colour gradient
     public static String getColour(float magnitude) {
         //Log.d("Colours", "Mag: " + magnitude);
+
         float magNormalised = (magnitude - minRange) / (maxRange - minRange);
+        if (magNormalised < 0f)
+            magNormalised = 0f;
+        else if (magNormalised > 1f)
+            magNormalised = 1f;
+
         for (int i = times.length - 1; i >= 0; i--) {
-            if (magNormalised >= times[i]) {
+            if (magNormalised > times[i]) {
                 int[] rgb1 = hexToRgb(colours[i]);
                 //Log.d("Colours", "rgb1: " + rgb1[0] + ", " + rgb1[1] + ", " + rgb1[2]);
                 int[] rgb2 = hexToRgb(colours[i + 1]);
@@ -33,6 +43,7 @@ public class MagnitudeColourCoding
         return "#ffffff";
     }
 
+    // Returns a hex colour code in the form #rrggbb
     public static String rgbToHex(int r, int g, int b) {
         Log.d("Colours", r + ", " + g + ", " + b);
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
@@ -45,6 +56,7 @@ public class MagnitudeColourCoding
         return "#" + red + green + blue;
     }
 
+    // Returns an array of integers of with the length of 3 (r, g and b) by passing a hex colour code in the form #rrggbb
     public static int[] hexToRgb(String hex) {
         if (hex.charAt(0) != '#') {
             Log.e("Colours", "Invalid Hex colour. Hex code must start with a \"#\".");
@@ -62,6 +74,7 @@ public class MagnitudeColourCoding
         return null;
     }
 
+    // Interpolates two colours and returns the result
     private static int[] lerpColour(int r1, int g1, int b1, int r2, int g2, int b2, float t) {
         return new int[] {
                 Math.round(r1 + t * (r2 - r1)),

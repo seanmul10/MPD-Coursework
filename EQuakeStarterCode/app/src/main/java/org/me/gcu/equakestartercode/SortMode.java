@@ -19,6 +19,7 @@ public enum SortMode {
                 return SortMode.DEPTH_DESCENDING;
             case 7:
                 return SortMode.DEPTH_ASCENDING;
+            case 0:
             default:
                 return SortMode.DATE_DESCENDING;
         }

@@ -125,6 +125,7 @@ public class Earthquake
         return day + ordinal + " of " + month + " " + year;
     }
 
+    // Sorts the array of earthquakes using a specified sorting method
     public static Earthquake[] sort(Earthquake[] earthquakeArray, SortMode sortMode) {
         boolean isSorted = false;
         while (!isSorted) {
