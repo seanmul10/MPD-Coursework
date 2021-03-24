@@ -151,9 +151,9 @@ public class Earthquake
             case MAGNITUDE_DESCENDING:
                 return eq1.getMagnitude() < eq2.getMagnitude();
             case DATE_ASCENDING:
-                return compareDates(eq1, eq2);
+                return eq1.getDateAndTimeString().compareToIgnoreCase(eq2.getDateAndTimeString()) > 0;
             case DATE_DESCENDING:
-                return compareDates(eq2, eq1);
+                return eq1.getDateAndTimeString().compareToIgnoreCase(eq2.getDateAndTimeString()) < 0;
             case ALPHABETICAL_ASCENDING:
                 return eq1.getLocation().compareToIgnoreCase(eq2.getLocation()) < 0;
             case ALPHABETICAL_DESCENDING:
@@ -166,32 +166,8 @@ public class Earthquake
         return false;
     }
 
-    private static boolean compareDates(Earthquake eq1, Earthquake eq2) {
-        if (eq1.getYear() == eq2.getYear())
-            return eq1.getYear() > eq2.getYear();
-        else {
-            if (eq1.getMonthValue() == eq2.getMonthValue())
-                return eq1.getMonthValue() > eq2.getMonthValue();
-            else {
-                if (eq1.getDay() == eq2.getDay())
-                    return eq1.getDay() > eq2.getDay();
-                else {
-                    String[] time1 = eq1.getTime().split(":");
-                    String[] time2 = eq2.getTime().split(":");
-                    if (Integer.parseInt(time1[0]) == Integer.parseInt(time2[0]))
-                        return Integer.parseInt(time1[0]) > Integer.parseInt(time2[0]);
-                    else {
-                        if (Integer.parseInt(time1[1]) == Integer.parseInt(time2[1]))
-                            return Integer.parseInt(time1[1]) > Integer.parseInt(time2[1]);
-                        else {
-                            if (Integer.parseInt(time1[2]) == Integer.parseInt(time2[2]))
-                                return Integer.parseInt(time1[2]) > Integer.parseInt(time2[2]);
-                            else
-                                return false;
-                        }
-                    }
-                }
-            }
-        }
+    // Returns date and time in the format YYYY:MM:DD:HH:MM:SS, this is used to sort the earthquakes by date and time
+    private String getDateAndTimeString() {
+        return getYear() + ":" + String.format("%02d", getMonthValue()) + ":" + String.format("%02d", getDay()) + ":" + getTime();
     }
 }
