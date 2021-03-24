@@ -30,6 +30,7 @@ import java.net.URLConnection;
 
 import java.util.*;
 
+import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -37,15 +38,18 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class MainActivity extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener
 {
     public static Earthquake[] earthquakes;
+    public static String lastBuildDate;
 
     private RecyclerView recyclerView;
 
     private String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
-
+    //private String urlSource="http://quakes.bgs.ac.uk/feeds/WorldSeismology.xml";
     private Spinner sortSpinner;
 
     private Button refreshButton;
     private Button mapButton;
+
+    private TextView lastBuildDateText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
         mapButton = (Button)findViewById(R.id.mapButton);
         mapButton.setOnClickListener(this);
+
+        lastBuildDateText = (TextView)findViewById(R.id.buildDate);
 
         startProgress();
     }
@@ -120,32 +126,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (position) {
-            case 0:
-                startProgress(SortMode.DATE_DESCENDING);
-                break;
-            case 1:
-                startProgress(SortMode.DATE_ASCENDING);
-                break;
-            case 2:
-                startProgress(SortMode.MAGNITUDE_DESCENDING);
-                break;
-            case 3:
-                startProgress(SortMode.MAGNITUDE_ASCENDING);
-                break;
-            case 4:
-                startProgress(SortMode.ALPHABETICAL_DESCENDING);
-                break;
-            case 5:
-                startProgress(SortMode.ALPHABETICAL_ASCENDING);
-                break;
-            case 6:
-                startProgress(SortMode.DEPTH_DESCENDING);
-                break;
-            case 7:
-                startProgress(SortMode.DEPTH_ASCENDING);
-                break;
-        }
+        SortMode sortMode = SortMode.getSortMode(position);
+        startProgress(sortMode);
     }
 
     public void onNothingSelected(AdapterView<?> parent) { }
@@ -203,10 +185,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                 Log.e("MyTag", "ioexception in run");
             }
 
-            //
-            // Now that you have the xml data you can parse it
-            //
-            earthquakes = ParseData(rawData);
+            // Parse the data and store it in the earthquakes array
+            EarthquakeData earthquakeData = ParseData(rawData);
+            earthquakes = earthquakeData.getEarthquakeArray();
+            lastBuildDate = earthquakeData.getLastBuildDate();
 
             // Now update the TextView to display raw XML data
             // Probably not the best way to update TextView
@@ -230,14 +212,17 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                     RecyclerAdapter adapter = new RecyclerAdapter(earthquakes);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                    lastBuildDateText.setText("Earthquake data correct as of " + lastBuildDate);
                 }
             });
         }
 
         // Takes raw data as an input and returns an array of earthquakes
-        private Earthquake[] ParseData(String data)  {
+        private EarthquakeData ParseData(String data)  {
             // List used to temporarily store the earthquakes
             List<Earthquake> earthquakeList = new ArrayList<Earthquake>();
+            String lastBuildDate = "No build date found";
 
             // Set up PullParser factory and pass it the raw data
             XmlPullParserFactory factory = null;
@@ -278,6 +263,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                                     Log.d("Parsing", "Parsed earthquake data");
                                 }
                             }
+                            else if (xpp.getName().equals("lastBuildDate")) {
+                                xpp.next();
+                                lastBuildDate = xpp.getText();
+                            }
                             break;
                         case XmlPullParser.END_TAG:
                             if (xpp.getName().equals("item")) {
@@ -294,7 +283,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             }
             Log.d("Parsing", "Finished parsing document");
             // Convert the list to an array and return it
-            return earthquakeList.toArray(new Earthquake[earthquakeList.size()]);
+
+            EarthquakeData earthquakeData = new EarthquakeData(earthquakeList.toArray(new Earthquake[earthquakeList.size()]), lastBuildDate);
+            return earthquakeData;
         }
     }
 }

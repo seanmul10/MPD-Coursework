@@ -3,37 +3,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent" android:layout_height="fill_parent">
+    android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:baselineAligned="false">
+
+    <TextView android:id="@+id/salutation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Welcome to Mobile Platform Development"/>
+
+    <TextView android:id="@+id/acknowledgement" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Contains British Geological Survey materials ©NERC 2019"/>
+
     <LinearLayout
-        android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <TextView android:id="@+id/salutation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Welcome to Mobile Platform Development"/>
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/refreshButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refresh" />
 
-        <TextView android:id="@+id/acknowledgement" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Contains British Geological Survey materials ©NERC 2019"/>
+        <Spinner
+            android:id="@+id/sortSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:text="Sort"/>
+    </LinearLayout>
 
-        <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:id="@+id/eqRecyclerView">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView android:id="@+id/buildDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="14dp" android:text="Data accurate as of: "/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <Button
+            android:id="@+id/mapButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/refreshButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Refresh" />
-
-            <Spinner
-                android:id="@+id/sortSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:text="Sort"/>
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="fill_parent"
-            android:layout_height="300dp"
-            android:id="@+id/eqRecyclerView">
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <Button android:id="@+id/mapButton" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Earthquakes Map"/>
-
-    </LinearLayout>
+            android:text="Earthquakes Map" />
+    </RelativeLayout>
 </LinearLayout>
