@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     public void onClick(View view)
     {
         if (view == refreshButton) {
-            recyclerView.setAdapter(null);
+            //recyclerView.setAdapter(null);
             startProgress();
         }
         if (view == mapButton) {
@@ -157,16 +157,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             BufferedReader in = null;
             String inputLine = "";
 
-            Log.e("MyTag","in run");
+            //Log.e("MyTag","in run");
 
             String rawData = ""; // This is the data that will be parsed and put into the earthquake array
             try
             {
-                Log.e("MyTag","in try");
+                //Log.e("MyTag","in try");
                 aurl = new URL(url);
                 yc = aurl.openConnection();
                 in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
-                Log.e("MyTag","after ready");
+                //Log.e("MyTag","after ready");
                 //
                 // Now read the data. Make sure that there are no specific hedrs
                 // in the data file that you need to ignore.
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                 while ((inputLine = in.readLine()) != null)
                 {
                     rawData += inputLine;
-                    Log.e("MyTag",inputLine);
+                    //Log.e("MyTag",inputLine);
 
                 }
                 in.close();
