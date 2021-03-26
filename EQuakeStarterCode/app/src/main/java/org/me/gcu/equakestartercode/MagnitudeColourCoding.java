@@ -14,7 +14,7 @@ public class MagnitudeColourCoding
     };
 
     // Time values for the colour gradient used to colour code earthquakes by magnitude
-    // First and last entries should always be 0f and 1f and there should be the same number of time values as colour values
+    // First and last entries should always be 0f and 1f and there must be the same number of time values as colour values
     private static float[] times = new float[] {
             //0f, .2f, .4f, .6f, .8f, 1f
             0f, .15f, .3f, .6f, 1f

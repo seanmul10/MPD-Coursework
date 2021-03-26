@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                     eqLatLong.setText("LatLng: " + earthquake.getLatitude() + ", " + earthquake.getLongitude());
                     eqDepth.setText("Depth: " + earthquake.getDepth() + "km");
                      */
-                    RecyclerAdapter adapter = new RecyclerAdapter(earthquakes);
+                    RecyclerAdapter adapter = new RecyclerAdapter(earthquakes, getApplicationContext());
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
