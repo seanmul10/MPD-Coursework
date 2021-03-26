@@ -75,7 +75,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         Earthquake earthquake = earthquakes[position];
         viewHolder.getEqLocation().setText(earthquake.getLocation());
         viewHolder.getEqDateTime().setText(earthquake.getDate());
-        //viewHolder.getEqMagnitude().setText(Float.toString(earthquake.getMagnitude()));
+        viewHolder.getEqMagnitude().setText(Float.toString(earthquake.getMagnitude()));
         viewHolder.getEqFrameLayout().setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
     }
 

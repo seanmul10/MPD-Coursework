@@ -41,7 +41,18 @@
             android:text="Mag"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:layout_weight="3"
+            android:layout_weight="1.5"
+            android:gravity="center">
+        </TextView>
+        <TextView
+            android:id="@+id/eqDepth"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textSize="18sp"
+            android:text="Depth"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_weight="1.5"
             android:gravity="center">
         </TextView>
     </LinearLayout>
