@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:baselineAligned="false">
 
+    <!--
     <TextView android:id="@+id/salutation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Welcome to Mobile Platform Development"/>
 
     <TextView android:id="@+id/acknowledgement" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Contains British Geological Survey materials ©NERC 2019"/>
-
+    -->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -32,29 +33,22 @@
         android:orientation="horizontal"
         android:padding="10dp"
         android:background="@color/purple_200">
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
             <TextView
                 android:id="@+id/eqLocation"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:text="Earthquake"
                 android:textColor="@color/black"
-                android:textStyle="bold">
+                android:layout_weight="1">
             </TextView>
-        </LinearLayout>
         <TextView
             android:id="@+id/eqMagnitude"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="Magnitude"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:layout_weight="1.5"
             android:gravity="center">
         </TextView>
@@ -62,10 +56,9 @@
             android:id="@+id/eqDepth"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="Depth"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:layout_weight="1.5"
             android:gravity="center">
         </TextView>
