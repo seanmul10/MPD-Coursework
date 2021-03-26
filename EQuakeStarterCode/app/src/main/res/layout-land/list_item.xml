@@ -7,18 +7,18 @@
     android:id="@+id/eqFrameLayout"
     android:orientation="vertical">
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="4dp">
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1">
             <TextView
                 android:id="@+id/eqLocation"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="Location"
@@ -27,7 +27,7 @@
             </TextView>
             <TextView
                 android:id="@+id/eqDateTime"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:textColor="@color/grey">
@@ -35,8 +35,8 @@
         </LinearLayout>
         <TextView
             android:id="@+id/eqMagnitude"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textSize="18sp"
             android:text="Mag"
             android:textColor="@color/black"
@@ -46,8 +46,8 @@
         </TextView>
         <TextView
             android:id="@+id/eqDepth"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textSize="18sp"
             android:text="Depth"
             android:textColor="@color/black"

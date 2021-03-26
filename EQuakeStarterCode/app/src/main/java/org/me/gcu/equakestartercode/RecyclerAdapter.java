@@ -19,10 +19,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private Earthquake[] earthquakes;
     private Context context;
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private FrameLayout eqFrameLayout;
         private TextView eqLocation;
@@ -89,9 +85,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         viewHolder.getEqLocation().setText(earthquake.getLocation());
         viewHolder.getEqDateTime().setText(earthquake.getDate());
         viewHolder.getEqMagnitude().setText(Float.toString(earthquake.getMagnitude()));
+
         // Only set the depth text view if the device is in landscape mode
         if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             viewHolder.getEqDepth().setText(Float.toString(earthquake.getDepth()) + "km");
+
         viewHolder.getEqFrameLayout().setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
     }
 

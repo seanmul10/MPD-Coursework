@@ -3,14 +3,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:baselineAligned="false">
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:baselineAligned="false">
 
-    <TextView android:id="@+id/salutation" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Welcome to Mobile Platform Development"/>
+    <TextView android:id="@+id/salutation" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Welcome to Mobile Platform Development"/>
 
-    <TextView android:id="@+id/acknowledgement" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Contains British Geological Survey materials ©NERC 2019"/>
+    <TextView android:id="@+id/acknowledgement" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Contains British Geological Survey materials ©NERC 2019"/>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
@@ -22,19 +22,19 @@
         <Spinner
             android:id="@+id/sortSpinner"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:text="Sort"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
         android:background="@color/purple_200">
         <TextView
             android:id="@+id/eqLocation"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="Earthquake"
@@ -43,8 +43,8 @@
         </TextView>
         <TextView
             android:id="@+id/eqMagnitude"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textSize="16sp"
             android:text="Magnitude"
             android:textColor="@color/black"
@@ -53,8 +53,8 @@
         </TextView>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/eqRecyclerView"
         android:layout_weight="1">
     </androidx.recyclerview.widget.RecyclerView>
@@ -68,20 +68,20 @@
 
         <Button
             android:id="@+id/listViewButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="List"
             android:layout_weight="1"/>
         <Button
             android:id="@+id/dateRangeButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Search in Range"
             android:layout_weight="1"/>
         <Button
             android:id="@+id/mapButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Map"
             android:layout_weight="1"/>
     </LinearLayout>
