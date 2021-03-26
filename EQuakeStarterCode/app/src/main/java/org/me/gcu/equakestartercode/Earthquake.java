@@ -108,19 +108,23 @@ public class Earthquake
     // Additional data retrieval methods
     public String getDate() {
         String ordinal;
-        switch (day % 10) {
-            case 1:
-                ordinal = "st";
-                break;
-            case 2:
-                ordinal = "nd";
-                break;
-            case 3:
-                ordinal = "rd";
-                break;
-            default:
-                ordinal = "th";
-                break;
+        if (day > 3 && day < 21) // All dates between 4th and 20th end in "th"
+            ordinal = "th";
+        else {
+            switch (day % 10) {
+                case 1:
+                    ordinal = "st";
+                    break;
+                case 2:
+                    ordinal = "nd";
+                    break;
+                case 3:
+                    ordinal = "rd";
+                    break;
+                default:
+                    ordinal = "th";
+                    break;
+            }
         }
         return day + ordinal + " of " + month + " " + year;
     }

@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">EQuakeStarterCode</string>
+    <string name="app_name">Recent UK Earthquakes</string>
+    <string name="recycler_view_button">Earthquake List</string>
+    <string name="search_by_date_button">Search by Date</string>
+    <string name="map_view_button">Location Map</string>
+
     <string-array name="sort_modes">
         <item>By date (Descending)</item>
         <item>By date (Ascending)</item>

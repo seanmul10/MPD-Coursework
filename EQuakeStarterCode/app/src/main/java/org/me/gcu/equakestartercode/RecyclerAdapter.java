@@ -23,6 +23,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         private TextView eqLocation;
         private TextView eqMagnitude;
         private TextView eqDateTime;
+        private TextView eqDepth;
 
         public ViewHolder(View view) {
             super(view);
@@ -43,11 +44,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
 
         public TextView getEqMagnitude() {
-            return eqLocation;
+            return eqMagnitude;
         }
 
         public TextView getEqDateTime() {
-            return eqLocation;
+            return eqDateTime;
         }
     }
 
@@ -73,6 +74,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         // contents of the view with that element
         Earthquake earthquake = earthquakes[position];
         viewHolder.getEqLocation().setText(earthquake.getLocation());
+        viewHolder.getEqDateTime().setText(earthquake.getDate());
         //viewHolder.getEqMagnitude().setText(Float.toString(earthquake.getMagnitude()));
         viewHolder.getEqFrameLayout().setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
     }
