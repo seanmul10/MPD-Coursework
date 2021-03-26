@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     private TextView lastBuildDateText;
 
+    private SortMode currentSortMode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -81,8 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     public void onClick(View view)
     {
         if (view == refreshButton) {
-            //recyclerView.setAdapter(null);
-            startProgress();
+            startProgress(currentSortMode);
         }
         if (view == mapButton) {
             Intent intent = new Intent(MainActivity.this, MapActivity.class);
@@ -129,8 +130,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     // Called when a new sort mode has been clicked in the spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        SortMode sortMode = SortMode.getSortMode(position);
-        startProgress(sortMode);
+        currentSortMode = SortMode.getSortMode(position);
+        startProgress(currentSortMode);
     }
 
     public void onNothingSelected(AdapterView<?> parent) { }
