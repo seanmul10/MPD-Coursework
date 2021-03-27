@@ -41,13 +41,13 @@ public class MagnitudeColourCoding
                 return rgbToHex(lerpedColour[0], lerpedColour[1], lerpedColour[2]);
             }
         }
-        Log.e("Colours", "Could not retrieve colour for the magnitude of " + magnitude);
+        //Log.e("Colours", "Could not retrieve colour for the magnitude of " + magnitude);
         return "#ffffff";
     }
 
     // Returns a hex colour code in the form #rrggbb
     public static String rgbToHex(int r, int g, int b) {
-        Log.d("Colours", r + ", " + g + ", " + b);
+        //Log.d("Colours", r + ", " + g + ", " + b);
         if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
             Log.e("Colours", "Invalid RGB colour. RGB values must be in the range 0-255.");
             return null;
