@@ -16,10 +16,14 @@ import org.w3c.dom.Text;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private Earthquake[] earthquakes;
+    private static RecyclerClickListener clickListener;
+
     private Context context;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    private Earthquake[] earthquakes;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
         private FrameLayout eqFrameLayout;
         private TextView eqLocation;
         private TextView eqMagnitude;
@@ -28,8 +32,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         public ViewHolder(View view, Context context) {
             super(view);
-            // Define click listener for the ViewHolder's View
 
+            // Define click listener for the ViewHolder's View
             eqFrameLayout = (FrameLayout)view.findViewById(R.id.eqFrameLayout);
             eqLocation = (TextView) view.findViewById(R.id.eqLocation);
             eqMagnitude = (TextView) view.findViewById(R.id.eqMagnitude);
@@ -57,20 +61,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         public TextView getEqDateTime() { return eqDateTime; }
 
         public TextView getEqDepth() { return eqDepth; }
+
+        @Override
+        public void onClick(View view) {
+            clickListener.onRecyclerItemClicked(view, this.getAdapterPosition());
+        }
     }
 
-    public RecyclerAdapter(Earthquake[] earthquakes, Context context)
+    public RecyclerAdapter(Earthquake[] earthquakes, Context context, RecyclerClickListener clickListener)
     {
         this.earthquakes = earthquakes;
         this.context = context;
+        this.clickListener = clickListener;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, viewGroup,false);
 
         return new ViewHolder(view, context);
     }

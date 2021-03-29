@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,11 +41,12 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-public class MainActivity extends EarthquakeActivity implements OnClickListener, AdapterView.OnItemSelectedListener
+public class MainActivity extends EarthquakeActivity implements OnClickListener, AdapterView.OnItemSelectedListener, RecyclerClickListener
 {
     public static Earthquake[] earthquakes;
     public static String lastBuildDate;
 
+    private RecyclerAdapter recyclerAdapter;
     private RecyclerView recyclerView;
 
     private String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
@@ -62,7 +67,6 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         setContentView(R.layout.activity_main);
 
         // Set up the raw links to the graphical components
-        recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
 
         sortSpinner = (Spinner)findViewById(R.id.sortSpinner);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.sort_modes, android.R.layout.simple_spinner_item);
@@ -72,6 +76,13 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
 
         refreshButton = (Button)findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(this);
+
+        earthquakes = new Earthquake[0];
+
+        recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
+        recyclerAdapter = new RecyclerAdapter(earthquakes, getApplicationContext(), this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(recyclerAdapter);
 
         lastBuildDateText = (TextView)findViewById(R.id.buildDate);
 
@@ -95,7 +106,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
     public void startProgress(SortMode sortMode)
     {
         // Run network access on a separate thread;
-        new Thread(new Task(urlSource, sortMode)).start();
+        new Thread(new Task(urlSource, sortMode, this)).start();
     }
 
     // Called when a new sort mode has been clicked in the spinner
@@ -107,6 +118,11 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
 
     public void onNothingSelected(AdapterView<?> parent) { }
 
+    @Override
+    public void onRecyclerItemClicked(View view, int position) {
+        Log.d("RecyclerView", "Clicked item at position: " + position);
+    }
+
     // Need separate thread to access the internet resource over network
     // Other neater solutions should be adopted in later iterations.
     private class Task implements Runnable
@@ -114,10 +130,13 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         private String url;
         private SortMode sortMode;
 
-        public Task(String url, SortMode sortMode)
+        private RecyclerClickListener recyclerClickListener;
+
+        public Task(String url, SortMode sortMode, RecyclerClickListener recyclerClickListener)
         {
             this.url = url;
             this.sortMode = sortMode;
+            this.recyclerClickListener = recyclerClickListener;
         }
         @Override
         public void run()
@@ -171,17 +190,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
 
                     earthquakes = Earthquake.sort(earthquakes, sortMode);
 
-                    /*
-                    eqView.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
-                    eqLocation.setText("Location: " + earthquake.getLocation());
-                    eqMagnitude.setText("Magnitude: " + earthquake.getMagnitude());
-                    eqDateTime.setText("Occurred on: " + earthquake.getDate() + " at " + earthquake.getTime());
-                    eqLatLong.setText("LatLng: " + earthquake.getLatitude() + ", " + earthquake.getLongitude());
-                    eqDepth.setText("Depth: " + earthquake.getDepth() + "km");
-                     */
-                    RecyclerAdapter adapter = new RecyclerAdapter(earthquakes, getApplicationContext());
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    recyclerAdapter.notifyDataSetChanged();
 
                     lastBuildDateText.setText("Earthquake data correct as of " + lastBuildDate);
                 }
