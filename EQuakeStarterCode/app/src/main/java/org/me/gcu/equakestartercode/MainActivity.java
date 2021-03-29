@@ -3,6 +3,7 @@ package org.me.gcu.equakestartercode;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.menuFragmentPlaceholder, new MenuFragment());
+        fragmentTransaction.commit();
+
         // Set up the raw links to the graphical components
         recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
 
@@ -73,9 +78,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         refreshButton = (Button)findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(this);
 
-        mapButton = (Button)findViewById(R.id.mapButton);
-        mapButton.setOnClickListener(this);
-
         lastBuildDateText = (TextView)findViewById(R.id.buildDate);
 
         startProgress();
@@ -85,33 +87,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     {
         if (view == refreshButton) {
             startProgress(currentSortMode);
-        }
-        if (view == mapButton) {
-            Intent intent = new Intent(MainActivity.this, MapActivity.class);
-/*
-            int length = earthquakes.length;
-            String[] locations = new String[length];
-            String[] dateTimes = new String[length];
-            float[] latitudes = new float[length];
-            float[] longitudes = new float[length];
-            float[] magnitudes = new float[length];
-            float[] depths = new float[length];
-            for (int i = 0; i < length; i++) {
-                locations[i] = earthquakes[i].getLocation();
-                dateTimes[i] = earthquakes[i].getDate();
-                latitudes[i] = earthquakes[i].getLatitude();
-                longitudes[i] = earthquakes[i].getLongitude();
-                magnitudes[i] = earthquakes[i].getMagnitude();
-                depths[i] = earthquakes[i].getDepth();
-            }
-            intent.putExtra("earthquakeLocations", locations);
-            intent.putExtra("earthquakeDateAndTimes", dateTimes);
-            intent.putExtra("earthquakeLatitudes", latitudes);
-            intent.putExtra("earthquakeLongitudes", longitudes);
-            intent.putExtra("earthquakeMagnitudes", magnitudes);
-            intent.putExtra("earthquakeDepths", depths);
-*/
-            startActivity(intent);
         }
     }
 
