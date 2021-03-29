@@ -232,7 +232,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
                                     if (location.equals(""))
                                         currentEarthquake.setLocation("UNKNOWN LOCATION");
                                     else
-                                        currentEarthquake.setLocation(desc[3].trim());
+                                        currentEarthquake.setLocation(location.replace(",", ", "));
                                     currentEarthquake.setLatLng(Float.parseFloat(latLong[0]), Float.parseFloat(latLong[1]));
                                     currentEarthquake.setDepth(Float.parseFloat(desc[7].trim().substring(0, desc[7].trim().length() - 2)));
                                     currentEarthquake.setMagnitude(Float.parseFloat(desc[9].trim()));
