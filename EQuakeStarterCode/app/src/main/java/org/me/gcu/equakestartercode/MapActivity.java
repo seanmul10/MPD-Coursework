@@ -1,9 +1,12 @@
 package org.me.gcu.equakestartercode;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,8 +17,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback
-{
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap map;
 
     @Override
@@ -45,25 +47,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-/*
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String[] locations = getIntent().getStringArrayExtra("earthquakeLocations");
-            String[] dateTimes = getIntent().getStringArrayExtra("earthquakeDateAndTimes");
-            float[] latitudes = getIntent().getFloatArrayExtra("earthquakeLatitudes");
-            float[] longitudes = getIntent().getFloatArrayExtra("earthquakeLongitudes");
-            float[] magnitudes = getIntent().getFloatArrayExtra("earthquakeMagnitudes");
-            float[] depths = getIntent().getFloatArrayExtra("earthquakeDepths");
 
-            // Place map markers
-            for (int i = 0; i < locations.length; i++) {
-                LatLng latLng = new LatLng(latitudes[i], longitudes[i]);
-                if (i == 0)
-                    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                map.addMarker(new MarkerOptions().position(latLng).title(locations[i]));
-            }
-        }
- */
         for (int i = 0; i < MainActivity.earthquakes.length; i++) {
             LatLng latLng = new LatLng(MainActivity.earthquakes[i].getLatitude(), MainActivity.earthquakes[i].getLongitude());
             if (i == 0)
