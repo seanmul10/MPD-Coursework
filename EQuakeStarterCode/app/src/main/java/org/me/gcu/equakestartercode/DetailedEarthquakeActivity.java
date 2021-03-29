@@ -1,5 +1,6 @@
 package org.me.gcu.equakestartercode;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -29,7 +30,7 @@ public class DetailedEarthquakeActivity extends FragmentActivity implements OnMa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_detailed);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.menuFragmentPlaceholder, new MenuFragment());
@@ -45,7 +46,7 @@ public class DetailedEarthquakeActivity extends FragmentActivity implements OnMa
 
         // Get earthquake index and set the earthquake to show a detailed display of
         int index = getIntent().getExtras().getInt("earthquakeIndex");
-        earthquake = MainActivity.earthquakes[0];
+        earthquake = MainActivity.earthquakes[index];
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -63,6 +64,8 @@ public class DetailedEarthquakeActivity extends FragmentActivity implements OnMa
         timeText.setText(earthquake.getTime());
         latLongText.setText(earthquake.getLatitude() + ", " + earthquake.getLongitude());
         depthText.setText(earthquake.getDepth() + "km");
+
+        magnitudeText.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
     }
 
     /**
@@ -79,7 +82,8 @@ public class DetailedEarthquakeActivity extends FragmentActivity implements OnMa
         map = googleMap;
 
         LatLng latLng = new LatLng(earthquake.getLatitude(), earthquake.getLongitude());
-        map.addMarker(new MarkerOptions().position(latLng).title(earthquake.getLocation()));
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        map.animateCamera(CameraUpdateFactory.zoomTo(5));
+        map.addMarker(new MarkerOptions().position(latLng).title(earthquake.getLocation()));
     }
 }
