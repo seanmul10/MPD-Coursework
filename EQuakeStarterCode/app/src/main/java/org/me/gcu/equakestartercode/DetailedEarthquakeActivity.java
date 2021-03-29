@@ -14,7 +14,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class DetailedEarthquakeActivity extends FragmentActivity implements OnMapReadyCallback
+public class DetailedEarthquakeActivity extends EarthquakeActivity implements OnMapReadyCallback
 {
     private Earthquake earthquake;
 
@@ -30,11 +30,8 @@ public class DetailedEarthquakeActivity extends FragmentActivity implements OnMa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.menuFragmentPlaceholder, new MenuFragment());
-        fragmentTransaction.commit();
+        setContentView(R.layout.activity_detailed);
 
         // Set up graphical components
         locationText = (TextView)findViewById(R.id.detailedLocation);

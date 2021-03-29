@@ -37,7 +37,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener
+public class MainActivity extends EarthquakeActivity implements OnClickListener, AdapterView.OnItemSelectedListener
 {
     public static Earthquake[] earthquakes;
     public static String lastBuildDate;
@@ -58,11 +58,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.menuFragmentPlaceholder, new MenuFragment());
-        fragmentTransaction.commit();
+        setContentView(R.layout.activity_main);
 
         // Set up the raw links to the graphical components
         recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
