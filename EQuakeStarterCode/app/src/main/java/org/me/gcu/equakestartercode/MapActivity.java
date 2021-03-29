@@ -23,6 +23,8 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
 {
     private GoogleMap map;
 
+    private String[] markerIDs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,21 +49,23 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-
         map.setOnMarkerClickListener(this);
+
+        markerIDs = new String[MainActivity.earthquakes.length];
 
         for (int i = 0; i < MainActivity.earthquakes.length; i++) {
             LatLng latLng = new LatLng(MainActivity.earthquakes[i].getLatitude(), MainActivity.earthquakes[i].getLongitude());
             if (i == 0)
                 map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            map.addMarker(new MarkerOptions().position(latLng).title(MainActivity.earthquakes[i].getLocation()));
+            Marker marker = map.addMarker(new MarkerOptions().position(latLng));
+            markerIDs[i] = marker.getId();
         }
     }
 
     @Override
     public boolean onMarkerClick(final Marker marker) {
         for (int i = 0; i < MainActivity.earthquakes.length; i++) {
-            if (marker.getTitle().equals(MainActivity.earthquakes[i].getLocation())) {
+            if (marker.getId().equals(markerIDs[i])) {
                 Intent intent = new Intent(this, DetailedEarthquakeActivity.class);
                 intent.putExtra("earthquakeIndex", i);
                 if (intent != null)

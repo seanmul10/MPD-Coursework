@@ -80,6 +80,6 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
 
         LatLng latLng = new LatLng(earthquake.getLatitude(), earthquake.getLongitude());
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8f));
-        map.addMarker(new MarkerOptions().position(latLng).title(earthquake.getLocation()));
+        map.addMarker(new MarkerOptions().position(latLng).title(earthquake.getLocation()).snippet(earthquake.getDate()));
     }
 }
