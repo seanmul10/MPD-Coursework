@@ -79,8 +79,7 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
         map = googleMap;
 
         LatLng latLng = new LatLng(earthquake.getLatitude(), earthquake.getLongitude());
-        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        map.animateCamera(CameraUpdateFactory.zoomTo(5));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8f));
         map.addMarker(new MarkerOptions().position(latLng).title(earthquake.getLocation()));
     }
 }
