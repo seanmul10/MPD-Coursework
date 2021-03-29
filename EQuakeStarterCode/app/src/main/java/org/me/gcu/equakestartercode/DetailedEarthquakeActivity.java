@@ -43,7 +43,7 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
 
         // Get earthquake index and set the earthquake to show a detailed display of
         int index = getIntent().getExtras().getInt("earthquakeIndex");
-        earthquake = MainActivity.earthquakes[index];
+        earthquake = MainActivity.earthquakes.get(index);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

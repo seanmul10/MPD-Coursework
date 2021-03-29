@@ -1,15 +1,17 @@
 package org.me.gcu.equakestartercode;
 
+import java.util.List;
+
 public class EarthquakeData {
-    private Earthquake[] earthquakes;
+    private List<Earthquake> earthquakes;
     private String lastBuildDate;
 
-    public EarthquakeData(Earthquake[] earthquakes, String lastBuildDate) {
+    public EarthquakeData(List<Earthquake> earthquakes, String lastBuildDate) {
         this.earthquakes = earthquakes;
         this.lastBuildDate = lastBuildDate;
     }
 
-    public Earthquake[] getEarthquakeArray() {
+    public List<Earthquake> getEarthquakeArray() {
         return earthquakes;
     }
 

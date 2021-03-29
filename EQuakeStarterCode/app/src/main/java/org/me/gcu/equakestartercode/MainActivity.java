@@ -43,7 +43,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class MainActivity extends EarthquakeActivity implements OnClickListener, AdapterView.OnItemSelectedListener, RecyclerClickListener
 {
-    public static Earthquake[] earthquakes;
+    public static List<Earthquake> earthquakes;
     public static String lastBuildDate;
 
     private RecyclerAdapter recyclerAdapter;
@@ -77,7 +77,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         refreshButton = (Button)findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(this);
 
-        earthquakes = new Earthquake[0];
+        earthquakes = new ArrayList<Earthquake>();
 
         recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
         recyclerAdapter = new RecyclerAdapter(earthquakes, getApplicationContext(), this);
@@ -269,7 +269,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
             Log.d("Parsing", "Finished parsing document");
             // Convert the list to an array and return it
 
-            EarthquakeData earthquakeData = new EarthquakeData(earthquakeList.toArray(new Earthquake[earthquakeList.size()]), lastBuildDate);
+            EarthquakeData earthquakeData = new EarthquakeData(earthquakeList, lastBuildDate);
             return earthquakeData;
         }
     }

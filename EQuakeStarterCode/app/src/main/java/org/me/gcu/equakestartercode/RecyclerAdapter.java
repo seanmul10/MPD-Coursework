@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private static RecyclerClickListener clickListener;
 
     private Context context;
-
-    private Earthquake[] earthquakes;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
@@ -68,9 +68,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    public RecyclerAdapter(Earthquake[] earthquakes, Context context, RecyclerClickListener clickListener)
+    public RecyclerAdapter(List<Earthquake> earthquakes, Context context, RecyclerClickListener clickListener)
     {
-        this.earthquakes = earthquakes;
         this.context = context;
         this.clickListener = clickListener;
     }
@@ -90,7 +89,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        Earthquake earthquake = earthquakes[position];
+        Earthquake earthquake = MainActivity.earthquakes.get(position);
         viewHolder.getEqLocation().setText(earthquake.getLocation());
         viewHolder.getEqDateTime().setText(earthquake.getDate());
         viewHolder.getEqMagnitude().setText(Float.toString(earthquake.getMagnitude()));
@@ -105,6 +104,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return earthquakes.length;
+        return MainActivity.earthquakes.size();
     }
 }

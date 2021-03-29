@@ -2,6 +2,8 @@ package org.me.gcu.equakestartercode;
 
 import android.util.Log;
 
+import java.util.List;
+
 public class Earthquake
 {
     private String location;
@@ -130,23 +132,23 @@ public class Earthquake
     }
 
     // Sorts the array of earthquakes using a specified sorting method
-    public static Earthquake[] sort(Earthquake[] earthquakeArray, SortMode sortMode) {
+    public static List<Earthquake> sort(List<Earthquake> earthquakeList, SortMode sortMode) {
         boolean isSorted = false;
         while (!isSorted) {
-            for (int i = 0; i < earthquakeArray.length - 1; i++) {
-                if (compareForSorting(earthquakeArray[i], earthquakeArray[i + 1], sortMode)) {
-                    Earthquake swap = earthquakeArray[i];
-                    earthquakeArray[i] = earthquakeArray[i + 1];
-                    earthquakeArray[i + 1] = swap;
+            for (int i = 0; i < earthquakeList.size() - 1; i++) {
+                if (compareForSorting(earthquakeList.get(i), earthquakeList.get(i + 1), sortMode)) {
+                    Earthquake swap = earthquakeList.get(i);
+                    earthquakeList.set(i, earthquakeList.get(i + 1));
+                    earthquakeList.set(i + 1, swap);
                     Log.d("Sorting", "Swapped elements at positions: " + i + " & " + (i + 1));
                     break;
                 }
-                if (i == earthquakeArray.length - 2) {
+                if (i == earthquakeList.size() - 2) {
                     isSorted = true;
                 }
             }
         }
-        return earthquakeArray;
+        return earthquakeList;
     }
 
     private static boolean compareForSorting(Earthquake eq1, Earthquake eq2, SortMode sortMode) {

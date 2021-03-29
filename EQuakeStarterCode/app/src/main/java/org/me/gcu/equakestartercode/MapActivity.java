@@ -51,10 +51,10 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
         map = googleMap;
         map.setOnMarkerClickListener(this);
 
-        markerIDs = new String[MainActivity.earthquakes.length];
+        markerIDs = new String[MainActivity.earthquakes.size()];
 
-        for (int i = 0; i < MainActivity.earthquakes.length; i++) {
-            LatLng latLng = new LatLng(MainActivity.earthquakes[i].getLatitude(), MainActivity.earthquakes[i].getLongitude());
+        for (int i = 0; i < MainActivity.earthquakes.size(); i++) {
+            LatLng latLng = new LatLng(MainActivity.earthquakes.get(i).getLatitude(), MainActivity.earthquakes.get(i).getLongitude());
             if (i == 0)
                 map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             Marker marker = map.addMarker(new MarkerOptions().position(latLng));
@@ -64,7 +64,7 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        for (int i = 0; i < MainActivity.earthquakes.length; i++) {
+        for (int i = 0; i < MainActivity.earthquakes.size(); i++) {
             if (marker.getId().equals(markerIDs[i])) {
                 Intent intent = new Intent(this, DetailedEarthquakeActivity.class);
                 intent.putExtra("earthquakeIndex", i);
