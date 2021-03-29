@@ -256,7 +256,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                                     currentEarthquake.setYear(Integer.parseInt(timeAndDate[3]));
                                     currentEarthquake.setTime(timeAndDate[4]);
 
-                                    currentEarthquake.setLocation(desc[3].trim());
+                                    // The location of an earthquake might not be specified as soon as the data becomes available
+                                    // In this case set the location name to unknown
+                                    String location = desc[3].trim();
+                                    if (location.equals(""))
+                                        currentEarthquake.setLocation("UNKNOWN LOCATION");
+                                    else
+                                        currentEarthquake.setLocation(desc[3].trim());
                                     currentEarthquake.setLatLng(Float.parseFloat(latLong[0]), Float.parseFloat(latLong[1]));
                                     currentEarthquake.setDepth(Float.parseFloat(desc[7].trim().substring(0, desc[7].trim().length() - 2)));
                                     currentEarthquake.setMagnitude(Float.parseFloat(desc[9].trim()));
