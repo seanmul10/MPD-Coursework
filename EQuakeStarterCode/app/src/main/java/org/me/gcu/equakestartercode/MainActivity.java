@@ -48,9 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     //private String urlSource="http://quakes.bgs.ac.uk/feeds/WorldSeismology.xml";
 
     private Spinner sortSpinner;
-
     private Button refreshButton;
-    private Button mapButton;
 
     private TextView lastBuildDateText;
 
