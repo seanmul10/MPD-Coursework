@@ -241,7 +241,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
                                     else
                                         currentEarthquake.setLocation(location.replace(",", ", "));
                                     currentEarthquake.setLatLng(Float.parseFloat(latLong[0]), Float.parseFloat(latLong[1]));
-                                    currentEarthquake.setDepth(Float.parseFloat(desc[7].trim().substring(0, desc[7].trim().length() - 2)));
+                                    currentEarthquake.setDepth(Integer.parseInt(desc[7].trim().substring(0, desc[7].trim().length() - 2).trim()));
                                     currentEarthquake.setMagnitude(Float.parseFloat(desc[9].trim()));
                                     Log.d("Parsing", "Parsed earthquake data");
                                 }

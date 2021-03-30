@@ -99,7 +99,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         // Only set the depth text view if the device is in landscape mode
         if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-            viewHolder.getEqDepth().setText(Float.toString(earthquake.getDepth()) + "km");
+            viewHolder.getEqDepth().setText(earthquake.getDepth() + "km");
 
         viewHolder.getEqFrameLayout().setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
     }

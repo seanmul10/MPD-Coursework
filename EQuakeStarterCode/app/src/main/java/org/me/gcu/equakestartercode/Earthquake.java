@@ -13,7 +13,7 @@ public class Earthquake
     private String time;
     private float latitude;
     private float longitude;
-    private float depth;
+    private int depth;
     private float magnitude;
 
     public Earthquake()
@@ -23,10 +23,11 @@ public class Earthquake
         month = Month.JANUARY;
         year = 2001;
         time = "00:00:00";
-        longitude = latitude = depth = magnitude = 0f;
+        longitude = latitude = magnitude = 0f;
+        depth = 0;
     }
 
-    public Earthquake(String location, int day, String month, int year, String time, float latitude, float longitude, float depth, float magnitude)
+    public Earthquake(String location, int day, String month, int year, String time, float latitude, float longitude, int depth, float magnitude)
     {
         this.location = location;
         this.day = day;
@@ -92,10 +93,10 @@ public class Earthquake
     }
 
     // Getter and setter for the depth
-    public float getDepth() {
+    public int getDepth() {
         return depth;
     }
-    public void setDepth(float depth) {
+    public void setDepth(int depth) {
         this.depth = depth;
     }
 
