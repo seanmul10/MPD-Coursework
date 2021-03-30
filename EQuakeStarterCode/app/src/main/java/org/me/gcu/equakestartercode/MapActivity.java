@@ -55,11 +55,13 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
 
         for (int i = 0; i < MainActivity.earthquakes.size(); i++) {
             LatLng latLng = new LatLng(MainActivity.earthquakes.get(i).getLatitude(), MainActivity.earthquakes.get(i).getLongitude());
-            if (i == 0)
-                map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             Marker marker = map.addMarker(new MarkerOptions().position(latLng));
             markerIDs[i] = marker.getId();
         }
+
+        // Move the camera and zoom it into roughly the centre of the UK
+        LatLng centre = new LatLng(Double.parseDouble(getResources().getString(R.string.start_lat)), Double.parseDouble(getResources().getString(R.string.start_lon)));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(centre, 5.45f));
     }
 
     @Override

@@ -3,6 +3,7 @@ package org.me.gcu.equakestartercode;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         @Override
         public void onClick(View view) {
             clickListener.onRecyclerItemClicked(view, this.getAdapterPosition());
+            Log.d("RecyclerView", "onClick");
         }
     }
 
