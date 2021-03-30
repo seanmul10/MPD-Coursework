@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="32sp"
+        android:textSize="24sp"
         android:text="Location"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -43,11 +43,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:text="Magnitude: 1.0"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:paddingVertical="20dp">
+            android:paddingVertical="15dp">
         </TextView>
 
         <LinearLayout
@@ -63,7 +63,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text="Date"
                     android:textColor="@color/black">
                 </TextView>
@@ -71,7 +71,7 @@
                     android:id="@+id/detailedDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:text="10th of March 2020"
                     android:textColor="@color/black"
                     android:textStyle="bold">
@@ -86,7 +86,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text="Time"
                     android:textColor="@color/black">
                 </TextView>
@@ -94,7 +94,7 @@
                     android:id="@+id/detailedTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:text="00:00:00"
                     android:textColor="@color/black"
                     android:textStyle="bold">
@@ -116,7 +116,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text="Location"
                     android:textColor="@color/black">
                 </TextView>
@@ -124,7 +124,7 @@
                     android:id="@+id/detailedLatLong"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:text="52.349, -3.154"
                     android:textColor="@color/black"
                     android:textStyle="bold">
@@ -139,7 +139,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:text="Depth"
                     android:textColor="@color/black">
                 </TextView>
@@ -147,7 +147,7 @@
                     android:id="@+id/detailedDepth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:text="16km"
                     android:textColor="@color/black"
                     android:textStyle="bold">
