@@ -45,6 +45,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 eqDepth = (TextView) view.findViewById(R.id.eqDepth);
             else
                 eqDepth = null;
+
+            view.setOnClickListener(this);
         }
 
         public FrameLayout getEqFrameLayout() {
@@ -70,7 +72,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    public RecyclerAdapter(List<Earthquake> earthquakes, Context context, RecyclerClickListener clickListener)
+    public RecyclerAdapter(Context context, RecyclerClickListener clickListener)
     {
         this.context = context;
         this.clickListener = clickListener;

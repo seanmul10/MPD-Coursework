@@ -80,7 +80,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         earthquakes = new ArrayList<Earthquake>();
 
         recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
-        recyclerAdapter = new RecyclerAdapter(earthquakes, getApplicationContext(), this);
+        recyclerAdapter = new RecyclerAdapter(getApplicationContext(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(recyclerAdapter);
 
@@ -106,7 +106,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
     public void startProgress(SortMode sortMode)
     {
         // Run network access on a separate thread;
-        new Thread(new Task(urlSource, sortMode, this)).start();
+        new Thread(new Task(urlSource, sortMode)).start();
     }
 
     // Called when a new sort mode has been clicked in the spinner
@@ -130,13 +130,10 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         private String url;
         private SortMode sortMode;
 
-        private RecyclerClickListener recyclerClickListener;
-
-        public Task(String url, SortMode sortMode, RecyclerClickListener recyclerClickListener)
+        public Task(String url, SortMode sortMode)
         {
             this.url = url;
             this.sortMode = sortMode;
-            this.recyclerClickListener = recyclerClickListener;
         }
         @Override
         public void run()
