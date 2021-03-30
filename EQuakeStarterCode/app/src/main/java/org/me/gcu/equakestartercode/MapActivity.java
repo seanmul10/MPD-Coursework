@@ -68,10 +68,7 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
     public boolean onMarkerClick(final Marker marker) {
         for (int i = 0; i < MainActivity.earthquakes.size(); i++) {
             if (marker.getId().equals(markerIDs[i])) {
-                Intent intent = new Intent(this, DetailedEarthquakeActivity.class);
-                intent.putExtra("earthquakeIndex", i);
-                if (intent != null)
-                    startActivity(intent);
+                startDetailedViewActivity(i);
             }
         }
         return false;

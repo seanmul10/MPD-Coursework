@@ -121,6 +121,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
     @Override
     public void onRecyclerItemClicked(View view, int position) {
         Log.d("RecyclerView", "Clicked item at position: " + position);
+        startDetailedViewActivity(position);
     }
 
     // Need separate thread to access the internet resource over network
