@@ -58,22 +58,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingVertical="4dp"
-        android:paddingHorizontal="10dp"
+        android:paddingLeft="10dp"
         style="@style/PrimaryBackground">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Earthquake"
-                style="@style/ItemHeader"
-                android:layout_weight="1">
-            </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Earthquake"
+            style="@style/ItemHeader"
+            android:layout_weight="1">
+        </TextView>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Depth"
             style="@style/ItemHeader"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingRight="10dp">
         </TextView>
         <TextView
             android:layout_width="match_parent"

@@ -51,7 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:paddingVertical="10dp"
+        android:paddingLeft="10dp"
         style="@style/PrimaryBackground">
         <TextView
             android:id="@+id/eqLocation"
