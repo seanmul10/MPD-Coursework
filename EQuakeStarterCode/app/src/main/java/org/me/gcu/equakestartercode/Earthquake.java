@@ -1,9 +1,5 @@
 package org.me.gcu.equakestartercode;
 
-import android.util.Log;
-
-import java.util.List;
-
 public class Earthquake
 {
     private String location;
@@ -133,7 +129,12 @@ public class Earthquake
     }
 
     // Returns date and time in the format YYYY:MM:DD:HH:MM:SS, this is used to sort the earthquakes by date and time
-    public String getDateAndTimeString() {
+    public String getComparableDateTime() {
+        return getComparableDate() + ":" + getTime();
+    }
+
+    // Returns date and time in the format YYYY:MM:DD:HH:MM:SS, this is used to sort the earthquakes by date and time
+    public String getComparableDate() {
         return getYear() + ":" + String.format("%02d", getMonthValue()) + ":" + String.format("%02d", getDay()) + ":" + getTime();
     }
 }
