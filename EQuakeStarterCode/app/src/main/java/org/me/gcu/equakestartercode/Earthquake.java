@@ -132,50 +132,8 @@ public class Earthquake
         return day + ordinal + " of " + month + " " + year;
     }
 
-    // Sorts the array of earthquakes using a specified sorting method
-    public static List<Earthquake> sort(List<Earthquake> earthquakeList, SortMode sortMode) {
-        boolean isSorted = false;
-        while (!isSorted) {
-            for (int i = 0; i < earthquakeList.size() - 1; i++) {
-                if (compareForSorting(earthquakeList.get(i), earthquakeList.get(i + 1), sortMode)) {
-                    Earthquake swap = earthquakeList.get(i);
-                    earthquakeList.set(i, earthquakeList.get(i + 1));
-                    earthquakeList.set(i + 1, swap);
-                    Log.d("Sorting", "Swapped elements at positions: " + i + " & " + (i + 1));
-                    break;
-                }
-                if (i == earthquakeList.size() - 2) {
-                    isSorted = true;
-                }
-            }
-        }
-        return earthquakeList;
-    }
-
-    private static boolean compareForSorting(Earthquake eq1, Earthquake eq2, SortMode sortMode) {
-        switch (sortMode) {
-            case MAGNITUDE_ASCENDING:
-                return eq1.getMagnitude() > eq2.getMagnitude();
-            case MAGNITUDE_DESCENDING:
-                return eq1.getMagnitude() < eq2.getMagnitude();
-            case DATE_ASCENDING:
-                return eq1.getDateAndTimeString().compareToIgnoreCase(eq2.getDateAndTimeString()) > 0;
-            case DATE_DESCENDING:
-                return eq1.getDateAndTimeString().compareToIgnoreCase(eq2.getDateAndTimeString()) < 0;
-            case ALPHABETICAL_ASCENDING:
-                return eq1.getLocation().compareToIgnoreCase(eq2.getLocation()) < 0;
-            case ALPHABETICAL_DESCENDING:
-                return eq2.getLocation().compareToIgnoreCase(eq1.getLocation()) < 0;
-            case DEPTH_ASCENDING:
-                return eq1.getDepth() > eq2.getDepth();
-            case DEPTH_DESCENDING:
-                return eq1.getDepth() < eq2.getDepth();
-        }
-        return false;
-    }
-
     // Returns date and time in the format YYYY:MM:DD:HH:MM:SS, this is used to sort the earthquakes by date and time
-    private String getDateAndTimeString() {
+    public String getDateAndTimeString() {
         return getYear() + ":" + String.format("%02d", getMonthValue()) + ":" + String.format("%02d", getDay()) + ":" + getTime();
     }
 }

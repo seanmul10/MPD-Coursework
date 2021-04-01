@@ -165,7 +165,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
                 public void run() {
                     Log.d("UI thread", "I am the UI thread");
 
-                    EarthquakeData.setEarthquakes(Earthquake.sort(EarthquakeData.getEarthquakes(), sortMode));
+                    EarthquakeData.sort(sortMode);
 
                     recyclerAdapter.notifyDataSetChanged();
 
