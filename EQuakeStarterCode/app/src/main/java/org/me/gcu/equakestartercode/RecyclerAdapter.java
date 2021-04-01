@@ -72,7 +72,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         public TextView getEqDateTime() { return eqDateTime; }
 
-        public TextView getEqDepth() { return eqDepth; }
+        public TextView getEqDepth()
+        {
+            if (eqDepth == null)
+                return null;
+            return eqDepth;
+        }
 
         @Override
         public void onClick(View view) {
@@ -101,10 +106,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         viewHolder.getEqMagnitude().setText(Float.toString(earthquake.getMagnitude()));
 
         // Only set the depth text view if the device is in landscape mode
-        // Currently seems to occasionally cause a crash due a null reference exception
-        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            while (viewHolder.getEqDepth() == null) {
+                // Wait until the layout has finished switching once the orientation has changed
+                // This ensures there is no attempt to access the depth TextView while the TextView is null
+            }
             viewHolder.getEqDepth().setText(earthquake.getDepth() + "km");
+        }
 
+        // Alternate each items background colour
         if (darkMode)
             viewHolder.getEqFrameLayout().setBackgroundColor(context.getColor(position % 2 == 0 ? R.color.item_dark_1 : R.color.item_dark_2));
         else
