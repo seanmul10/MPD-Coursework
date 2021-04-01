@@ -62,7 +62,7 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
         latLongText.setText(earthquake.getLatitude() + ", " + earthquake.getLongitude());
         depthText.setText(earthquake.getDepth() + "km");
 
-        magnitudeText.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
+        magnitudeText.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude(), getApplicationContext())));
     }
 
     /**

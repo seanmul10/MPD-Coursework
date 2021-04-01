@@ -8,6 +8,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        style="@style/TertiaryBackground">
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recent UK Earthquakes"
+            style="@style/PrimaryText">
+        </TextView>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </Space>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MPD coursework submission by Sean Muldoon, S1714073"
+            style="@style/SecondaryText">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="horizontal">
         <LinearLayout
@@ -16,18 +43,21 @@
             android:orientation="vertical"
             android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/detailedLocation"
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="24sp"
-                android:text="Location"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:paddingVertical="15dp"
-                android:background="@color/purple_200">
-            </TextView>
+                style="@style/PrimaryBackground">
+                <TextView
+                    android:id="@+id/detailedLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Location"
+                    style="@style/ItemMainText"
+                    android:textSize="22sp"
+                    android:paddingVertical="20dp">
+                </TextView>
+            </RelativeLayout>
             <fragment
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/detailedMap"
@@ -42,10 +72,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="18sp"
                 android:text="Magnitude: 1.0"
-                android:textColor="@color/black"
-                android:textStyle="bold"
+                style="@style/ItemMainText"
+                android:textSize="18sp"
                 android:paddingVertical="10dp">
             </TextView>
         </LinearLayout>
@@ -53,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/purple_200"
+            style="@style/SecondaryBackground"
             android:layout_weight="1.5">
 
             <LinearLayout
@@ -65,9 +94,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:text="Date"
-                    android:textColor="@color/black">
+                    style="@style/ItemHeader">
                 </TextView>
                 <TextView
                     android:id="@+id/detailedDate"
@@ -75,8 +103,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:text="10th of March 2020"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
+                    style="@style/ItemMainText">
                 </TextView>
             </LinearLayout>
             <LinearLayout
@@ -88,9 +115,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:text="Time"
-                    android:textColor="@color/black">
+                    style="@style/ItemHeader">
                 </TextView>
                 <TextView
                     android:id="@+id/detailedTime"
@@ -98,8 +124,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:text="14:23:51"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
+                    style="@style/ItemMainText">
                 </TextView>
             </LinearLayout>
             <LinearLayout
@@ -111,9 +136,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:text="Location"
-                    android:textColor="@color/black">
+                    style="@style/ItemHeader">
                 </TextView>
                 <TextView
                     android:id="@+id/detailedLatLong"
@@ -121,8 +145,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:text="52.349, -3.154"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
+                    style="@style/ItemMainText">
                 </TextView>
             </LinearLayout>
             <LinearLayout
@@ -134,9 +157,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:text="Depth"
-                    android:textColor="@color/black">
+                    style="@style/ItemHeader">
                 </TextView>
                 <TextView
                     android:id="@+id/detailedDepth"
@@ -144,8 +166,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:text="14km"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
+                    style="@style/ItemMainText">
                 </TextView>
             </LinearLayout>
         </LinearLayout>

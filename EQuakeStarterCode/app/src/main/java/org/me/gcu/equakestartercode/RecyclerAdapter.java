@@ -23,6 +23,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     private Context context;
 
+    private boolean darkMode;
+
+    public RecyclerAdapter(Context context, RecyclerClickListener clickListener)
+    {
+        this.context = context;
+        this.clickListener = clickListener;
+        darkMode = EarthquakeActivity.isDarkMode(context);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         private FrameLayout eqFrameLayout;
@@ -71,12 +80,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    public RecyclerAdapter(Context context, RecyclerClickListener clickListener)
-    {
-        this.context = context;
-        this.clickListener = clickListener;
-    }
-
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -98,10 +101,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         viewHolder.getEqMagnitude().setText(Float.toString(earthquake.getMagnitude()));
 
         // Only set the depth text view if the device is in landscape mode
+        // Currently seems to occasionally cause a crash due a null reference exception
         if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             viewHolder.getEqDepth().setText(earthquake.getDepth() + "km");
 
-        viewHolder.getEqFrameLayout().setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude())));
+        if (darkMode)
+            viewHolder.getEqFrameLayout().setBackgroundColor(context.getColor(position % 2 == 0 ? R.color.item_dark_1 : R.color.item_dark_2));
+        else
+            viewHolder.getEqFrameLayout().setBackgroundColor(context.getColor(position % 2 == 0 ? R.color.item_light_1 : R.color.item_light_2));
+        viewHolder.getEqMagnitude().setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude(), context)));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

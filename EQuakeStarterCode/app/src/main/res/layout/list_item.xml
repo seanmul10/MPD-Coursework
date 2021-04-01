@@ -20,27 +20,23 @@
                 android:id="@+id/eqLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Location"
-                android:textColor="@color/black"
-                android:textStyle="bold">
+                style="@style/ItemMainText"
+                android:text="Location">
             </TextView>
             <TextView
                 android:id="@+id/eqDateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date"
-                android:textColor="@color/grey">
+                style="@style/ItemSubText"
+                android:text="Date">
             </TextView>
         </LinearLayout>
         <TextView
             android:id="@+id/eqMagnitude"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="18sp"
+            style="@style/ItemMainText"
             android:text="Mag"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:layout_weight="3"
             android:gravity="center">
         </TextView>

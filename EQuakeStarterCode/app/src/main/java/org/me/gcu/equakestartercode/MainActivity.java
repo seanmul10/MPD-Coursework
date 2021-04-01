@@ -1,29 +1,16 @@
 package org.me.gcu.equakestartercode;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -36,7 +23,6 @@ import java.net.URLConnection;
 
 import java.util.*;
 
-import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -173,7 +159,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
             }
 
             // Parse the data and store it in the earthquakes array
-            EarthquakeData earthquakeData = ParseData(rawData);
+            EarthquakeData earthquakeData = parseData(rawData);
             earthquakes = earthquakeData.getEarthquakeArray();
             lastBuildDate = earthquakeData.getLastBuildDate();
 
@@ -196,7 +182,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         }
 
         // Takes raw data as an input and returns an array of earthquakes
-        private EarthquakeData ParseData(String data)  {
+        private EarthquakeData parseData(String data)  {
             // List used to temporarily store the earthquakes
             List<Earthquake> earthquakeList = new ArrayList<Earthquake>();
             String lastBuildDate = "No build date found";
@@ -265,7 +251,6 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
                 e.printStackTrace();
             }
             Log.d("Parsing", "Finished parsing document");
-            // Convert the list to an array and return it
 
             EarthquakeData earthquakeData = new EarthquakeData(earthquakeList, lastBuildDate);
             return earthquakeData;

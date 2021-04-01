@@ -1,5 +1,7 @@
 package org.me.gcu.equakestartercode;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
 
 public class MagnitudeColourCoding
@@ -8,21 +10,27 @@ public class MagnitudeColourCoding
     public static float maxRange = 4f;
 
     // Colour values for the colour gradient used to colour code earthquakes by magnitude
-    private static String[] colours = new String[] {
-            //"#fef5ff", "#fffe97", "#e7aa40", "#c31c1c", "#78050d", "#56018a"
+    private static String[] coloursLight = new String[] {
             "#ffffff", "#deffd1", "#feffba", "#ffc7b2", "#ff8282"
+    };
+
+    // Colour values for the colour gradient used to colour code earthquakes by magnitude in dark mode
+    // Must be the same number of values as in the coloursLight array
+    private static String[] coloursDark = new String[] {
+            "#044554", "#1b6100", "#5b5d00", "#732a00", "#4f0000"
     };
 
     // Time values for the colour gradient used to colour code earthquakes by magnitude
     // First and last entries should always be 0f and 1f and there must be the same number of time values as colour values
     private static float[] times = new float[] {
-            //0f, .2f, .4f, .6f, .8f, 1f
             0f, .15f, .3f, .6f, 1f
     };
 
     // Returns a colour by passing in a magnitude and getting the corresponding colour from a colour gradient
-    public static String getColour(float magnitude) {
-        //Log.d("Colours", "Mag: " + magnitude);
+    // Context is required for checking if the device is in night mode
+    public static String getColour(float magnitude, Context context)
+    {
+        String[] colours = EarthquakeActivity.isDarkMode(context) ? coloursDark : coloursLight;
 
         float magNormalised = (magnitude - minRange) / (maxRange - minRange);
         if (magNormalised < 0f)

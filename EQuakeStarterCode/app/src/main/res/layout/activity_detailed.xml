@@ -5,22 +5,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:baselineAligned="false">
 
-    <TextView android:id="@+id/salutation" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Welcome to Mobile Platform Development"/>
-
-    <TextView android:id="@+id/acknowledgement" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Contains British Geological Survey materials ©NERC 2019"/>
-
-    <TextView
-        android:id="@+id/detailedLocation"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:text="Location"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:paddingVertical="20dp"
-        android:background="@color/purple_200">
-    </TextView>
+        android:orientation="vertical"
+        android:padding="10dp"
+        style="@style/TertiaryBackground">
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recent UK Earthquakes"
+            style="@style/PrimaryText">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MPD coursework submission by Sean Muldoon, S1714073"
+            style="@style/SecondaryText">
+        </TextView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/PrimaryBackground">
+        <TextView
+            android:id="@+id/detailedLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Location"
+            style="@style/ItemMainText"
+            android:textSize="24sp"
+            android:paddingVertical="20dp">
+        </TextView>
+    </RelativeLayout>
 
     <fragment
         xmlns:tools="http://schemas.android.com/tools"
@@ -36,17 +56,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/purple_200">
+        style="@style/SecondaryBackground">
 
         <TextView
             android:id="@+id/detailedMagnitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="22sp"
             android:text="Magnitude: 1.0"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            style="@style/ItemMainText"
+            android:textSize="22sp"
             android:paddingVertical="15dp">
         </TextView>
 
@@ -63,9 +82,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:text="Date"
-                    android:textColor="@color/black">
+                    style="@style/ItemHeader">
                 </TextView>
                 <TextView
                     android:id="@+id/detailedDate"
@@ -73,8 +91,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="10th of March 2020"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
+                    style="@style/ItemMainText">
                 </TextView>
             </LinearLayout>
             <LinearLayout
@@ -86,9 +103,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:text="Time"
-                    android:textColor="@color/black">
+                    style="@style/ItemHeader">
                 </TextView>
                 <TextView
                     android:id="@+id/detailedTime"
@@ -96,8 +112,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="00:00:00"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
+                    style="@style/ItemMainText">
                 </TextView>
             </LinearLayout>
         </LinearLayout>
@@ -116,9 +131,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:text="Location"
-                    android:textColor="@color/black">
+                    style="@style/ItemHeader">
                 </TextView>
                 <TextView
                     android:id="@+id/detailedLatLong"
@@ -126,8 +140,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="52.349, -3.154"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
+                    style="@style/ItemMainText">
                 </TextView>
             </LinearLayout>
             <LinearLayout
@@ -139,9 +152,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:text="Depth"
-                    android:textColor="@color/black">
+                    style="@style/ItemHeader">
                 </TextView>
                 <TextView
                     android:id="@+id/detailedDepth"
@@ -149,8 +161,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="16km"
-                    android:textColor="@color/black"
-                    android:textStyle="bold">
+                    style="@style/ItemMainText">
                 </TextView>
             </LinearLayout>
         </LinearLayout>

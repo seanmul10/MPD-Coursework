@@ -3,17 +3,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:baselineAligned="false">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:baselineAligned="false">
 
-    <!--
-    <TextView android:id="@+id/salutation" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Welcome to Mobile Platform Development"/>
-
-    <TextView android:id="@+id/acknowledgement" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" android:text="Contains British Geological Survey materials ©NERC 2019"/>
-    -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        style="@style/TertiaryBackground">
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recent UK Earthquakes"
+            style="@style/PrimaryText">
+        </TextView>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </Space>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MPD coursework submission by Sean Muldoon, S1714073"
+            style="@style/SecondaryText">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        style="@style/SecondaryBackground">
         <Button
             android:id="@+id/refreshButton"
             android:layout_width="wrap_content"
@@ -33,34 +59,28 @@
         android:orientation="horizontal"
         android:paddingVertical="4dp"
         android:paddingHorizontal="10dp"
-        android:background="@color/purple_200">
+        style="@style/PrimaryBackground">
             <TextView
-                android:id="@+id/eqLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:text="Earthquake"
-                android:textColor="@color/black"
+                style="@style/ItemHeader"
                 android:layout_weight="1">
             </TextView>
         <TextView
-            android:id="@+id/eqMagnitude"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="16sp"
-            android:text="Magnitude"
-            android:textColor="@color/black"
-            android:layout_weight="1.5"
+            android:text="Depth"
+            style="@style/ItemHeader"
+            android:layout_weight="1"
             android:gravity="center">
         </TextView>
         <TextView
-            android:id="@+id/eqDepth"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="16sp"
-            android:text="Depth"
-            android:textColor="@color/black"
-            android:layout_weight="1.5"
+            android:text="Magnitude"
+            style="@style/ItemHeader"
+            android:layout_weight="1.25"
             android:gravity="center">
         </TextView>
     </LinearLayout>
@@ -71,7 +91,20 @@
         android:layout_weight="1">
     </androidx.recyclerview.widget.RecyclerView>
 
-    <TextView android:id="@+id/buildDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="14dp" android:text="Data accurate as of: "/>
+    <TextView
+        android:id="@+id/acknowledgement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:text="Contains British Geological Survey materials ©NERC 2019"
+        style="@style/ItemSubText"/>
+    <TextView
+        android:id="@+id/buildDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:text="Data accurate as of: "
+        style="@style/ItemSubText"/>
 
     <FrameLayout
         android:id="@+id/menuFragmentPlaceholder"

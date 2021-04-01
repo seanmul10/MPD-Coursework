@@ -1,16 +1,47 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Theme.EQuakeStarterCode" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/primary_dark</item>
+        <item name="colorPrimaryVariant">@color/secondary_dark</item>
+        <item name="colorOnPrimary">@color/off_white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/secondary_dark</item>
+        <item name="colorSecondaryVariant">@color/tertiary_dark</item>
+        <item name="colorOnSecondary">@color/off_white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+    <!-- Text styles -->
+    <style name="PrimaryText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/off_white</item>
+    </style>
+    <style name="SecondaryText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/light_grey</item>
+    </style>
+    <style name="ItemHeader" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="ItemMainText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/off_white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="ItemSubText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/light_grey</item>
+    </style>
+    <!-- Backgrounds -->
+    <style name="PrimaryBackground" parent="TextAppearance.AppCompat">
+        <item name="android:background">@color/primary_dark</item>
+    </style>
+    <style name="SecondaryBackground" parent="TextAppearance.AppCompat">
+        <item name="android:background">@color/secondary_dark</item>
+    </style>
+    <style name="TertiaryBackground" parent="TextAppearance.AppCompat">
+        <item name="android:background">@color/tertiary_dark</item>
     </style>
 </resources>
