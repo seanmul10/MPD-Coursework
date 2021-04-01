@@ -3,6 +3,7 @@ package org.me.gcu.equakestartercode;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -11,10 +12,14 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class SearchByDateActivity extends EarthquakeActivity implements DatePickerDialog.OnDateSetListener, View.OnClickListener
 {
+    List<Earthquake> earthquakeRange;
+
     DatePickerDialog datePickerDialog1;
     DatePickerDialog datePickerDialog2;
 
@@ -28,6 +33,8 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_date_search);
+
+        earthquakeRange = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
         datePickerDialog1 = new DatePickerDialog(this, SearchByDateActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -68,7 +75,8 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
             datePickerDialog2.show();
         }
         else if (view == searchButton) {
-            // Search
+            earthquakeRange = EarthquakeData.getEarthquakesInRange(getComparableDate(datePickerDialog1.getDatePicker()), getComparableDate(datePickerDialog2.getDatePicker()));
+            Log.d("DateSearch", "Found " + earthquakeRange.size() + " earthquakes in the given range.");
         }
     }
 
@@ -81,11 +89,8 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
     }
 
     private boolean isDatesInvalid() {
-        DatePicker dp1 = datePickerDialog1.getDatePicker();
-        DatePicker dp2 = datePickerDialog2.getDatePicker();
-
-        String date1 = "" + dp1.getYear() + dp1.getMonth() + dp1.getDayOfMonth();
-        String date2 = "" + dp2.getYear() + dp2.getMonth() + dp2.getDayOfMonth();
+        String date1 = getComparableDate(datePickerDialog1.getDatePicker());
+        String date2 = getComparableDate(datePickerDialog2.getDatePicker());
 
         if (date1.compareToIgnoreCase(date2) > 0)
             return true;
@@ -100,5 +105,9 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
                 .setNegativeButton(negativeButton, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    private String getComparableDate(DatePicker datePicker) {
+        return datePicker.getYear() + ":" + String.format("%02d", datePicker.getMonth() + 1) + ":" + String.format("%02d", datePicker.getDayOfMonth());
     }
 }

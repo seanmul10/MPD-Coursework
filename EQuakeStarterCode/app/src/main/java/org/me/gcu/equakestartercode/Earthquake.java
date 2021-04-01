@@ -56,7 +56,7 @@ public class Earthquake
     public String getMonth() {
         return month.toString();
     }
-    public int getMonthValue() { return month.ordinal() + 1; }
+    public int getMonthValue() { return month.ordinal(); }
     public void setMonth(String month) {
         this.month = Month.getMonth(month);
     }
@@ -133,8 +133,8 @@ public class Earthquake
         return getComparableDate() + ":" + getTime();
     }
 
-    // Returns date and time in the format YYYY:MM:DD:HH:MM:SS, this is used to sort the earthquakes by date and time
+    // Returns date and time in the format YYYY:MM:DD, this is used to sort the earthquakes by date
     public String getComparableDate() {
-        return getYear() + ":" + String.format("%02d", getMonthValue()) + ":" + String.format("%02d", getDay()) + ":" + getTime();
+        return getYear() + ":" + String.format("%02d", getMonthValue()) + ":" + String.format("%02d", getDay());
     }
 }

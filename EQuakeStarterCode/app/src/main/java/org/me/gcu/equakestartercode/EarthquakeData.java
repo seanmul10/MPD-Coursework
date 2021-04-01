@@ -72,6 +72,8 @@ public class EarthquakeData {
         List<Earthquake> earthquakesInRange = new ArrayList<Earthquake>();
         for (int i = 0; i < _earthquakes.size(); i++) {
             String date = _earthquakes.get(i).getComparableDate();
+            Log.d("DateSearch", "Earthquake search: " + _earthquakes.get(i).getLocation() + " - " + earliestDate + " > " +  _earthquakes.get(i).getComparableDate() + " < " + latestDate);
+            Log.d("DateSearch", "Compared to start date: " + date.compareToIgnoreCase(earliestDate) + ", Compare to end date: " + date.compareToIgnoreCase(latestDate));
             if (date.compareToIgnoreCase(earliestDate) >= 0 &&
                     date.compareToIgnoreCase(latestDate) <= 0)
                 earthquakesInRange.add(_earthquakes.get(i));
