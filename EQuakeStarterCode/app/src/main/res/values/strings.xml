@@ -3,8 +3,9 @@
     <string name="recycler_view_button">Earthquake List</string>
     <string name="search_by_date_button">Search by Date</string>
     <string name="map_view_button">Location Map</string>
-    <string name="start_lat">55.249</string>
-    <string name="start_lon">-3.138</string>
+    <string name="start_lat">55</string>
+    <string name="start_lon">-3.7</string>
+    <string name="start_zoom">5.1</string>
     <string-array name="sort_modes">
         <item>By date (Descending)</item>
         <item>By date (Ascending)</item>

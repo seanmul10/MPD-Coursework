@@ -61,7 +61,7 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
 
         // Move the camera and zoom it into roughly the centre of the UK
         LatLng centre = new LatLng(Double.parseDouble(getResources().getString(R.string.start_lat)), Double.parseDouble(getResources().getString(R.string.start_lon)));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(centre, 5.4f));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(centre, Float.parseFloat(getResources().getString(R.string.start_zoom))));
     }
 
     @Override
