@@ -19,6 +19,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 public class MapActivity extends EarthquakeActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener
 {
     private GoogleMap map;
@@ -51,10 +53,12 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
         map = googleMap;
         map.setOnMarkerClickListener(this);
 
-        markerIDs = new String[MainActivity.earthquakes.size()];
+        List<Earthquake> earthquakeList = EarthquakeData.getEarthquakes();
 
-        for (int i = 0; i < MainActivity.earthquakes.size(); i++) {
-            LatLng latLng = new LatLng(MainActivity.earthquakes.get(i).getLatitude(), MainActivity.earthquakes.get(i).getLongitude());
+        markerIDs = new String[earthquakeList.size()];
+
+        for (int i = 0; i < earthquakeList.size(); i++) {
+            LatLng latLng = new LatLng(earthquakeList.get(i).getLatitude(), earthquakeList.get(i).getLongitude());
             Marker marker = map.addMarker(new MarkerOptions().position(latLng));
             markerIDs[i] = marker.getId();
         }
@@ -66,7 +70,7 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        for (int i = 0; i < MainActivity.earthquakes.size(); i++) {
+        for (int i = 0; i < EarthquakeData.getEarthquakes().size(); i++) {
             if (marker.getId().equals(markerIDs[i])) {
                 startDetailedViewActivity(i);
             }

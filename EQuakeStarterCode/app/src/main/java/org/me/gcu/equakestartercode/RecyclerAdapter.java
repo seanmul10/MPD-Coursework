@@ -100,7 +100,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        Earthquake earthquake = MainActivity.earthquakes.get(position);
+        Earthquake earthquake = EarthquakeData.getEarthquakes().get(position);
         viewHolder.getEqLocation().setText(earthquake.getLocation());
         viewHolder.getEqDateTime().setText(earthquake.getDate());
         viewHolder.getEqMagnitude().setText(Float.toString(earthquake.getMagnitude()));
@@ -125,6 +125,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return MainActivity.earthquakes.size();
+        return EarthquakeData.getEarthquakes().size();
     }
 }

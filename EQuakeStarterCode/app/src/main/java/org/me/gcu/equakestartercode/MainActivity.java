@@ -29,9 +29,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class MainActivity extends EarthquakeActivity implements OnClickListener, AdapterView.OnItemSelectedListener, RecyclerClickListener
 {
-    public static List<Earthquake> earthquakes;
-    public static String lastBuildDate;
-
     private RecyclerAdapter recyclerAdapter;
     private RecyclerView recyclerView;
 
@@ -62,8 +59,6 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
 
         refreshButton = (Button)findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(this);
-
-        earthquakes = new ArrayList<Earthquake>();
 
         recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
         recyclerAdapter = new RecyclerAdapter(getApplicationContext(), this);
@@ -158,10 +153,8 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
                 Log.e("MyTag", "ioexception in run");
             }
 
-            // Parse the data and store it in the earthquakes array
-            EarthquakeData earthquakeData = parseData(rawData);
-            earthquakes = earthquakeData.getEarthquakeArray();
-            lastBuildDate = earthquakeData.getLastBuildDate();
+            // Parse the data and store it in the EarthquakeData class
+            parseData(rawData);
 
             // Now update the TextView to display raw XML data
             // Probably not the best way to update TextView
@@ -172,17 +165,17 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
                 public void run() {
                     Log.d("UI thread", "I am the UI thread");
 
-                    earthquakes = Earthquake.sort(earthquakes, sortMode);
+                    EarthquakeData.setEarthquakes(Earthquake.sort(EarthquakeData.getEarthquakes(), sortMode));
 
                     recyclerAdapter.notifyDataSetChanged();
 
-                    lastBuildDateText.setText("Earthquake data correct as of " + lastBuildDate);
+                    lastBuildDateText.setText("Earthquake data correct as of " + EarthquakeData.getLastBuildDate());
                 }
             });
         }
 
         // Takes raw data as an input and returns an array of earthquakes
-        private EarthquakeData parseData(String data)  {
+        private void parseData(String data)  {
             // List used to temporarily store the earthquakes
             List<Earthquake> earthquakeList = new ArrayList<Earthquake>();
             String lastBuildDate = "No build date found";
@@ -252,8 +245,8 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
             }
             Log.d("Parsing", "Finished parsing document");
 
-            EarthquakeData earthquakeData = new EarthquakeData(earthquakeList, lastBuildDate);
-            return earthquakeData;
+            EarthquakeData.setEarthquakes(earthquakeList);
+            EarthquakeData.setLastBuildDate(lastBuildDate);
         }
     }
 }
