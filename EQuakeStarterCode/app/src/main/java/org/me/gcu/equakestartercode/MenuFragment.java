@@ -43,7 +43,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener
         }
 
         if (view == dateRangeButton) {
-            intent = new Intent(getActivity(), MapActivity.class);
+            intent = new Intent(getActivity(), SearchByDateActivity.class);
         }
 
         if (view == mapButton) {
