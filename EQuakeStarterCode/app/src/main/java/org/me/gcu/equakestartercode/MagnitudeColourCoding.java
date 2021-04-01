@@ -17,7 +17,7 @@ public class MagnitudeColourCoding
     // Colour values for the colour gradient used to colour code earthquakes by magnitude in dark mode
     // Must be the same number of values as in the coloursLight array
     private static String[] coloursDark = new String[] {
-            "#044554", "#1b6100", "#5b5d00", "#732a00", "#4f0000"
+            "#56a3b5", "#3ab60a", "#bcbf00", "#cb5009", "#c80000"
     };
 
     // Time values for the colour gradient used to colour code earthquakes by magnitude
