@@ -95,7 +95,6 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
@@ -118,28 +117,16 @@
                             style="@style/ItemSubText">
                         </TextView>
                     </LinearLayout>
-                    <TextView
-                        android:id="@+id/largestEqMagnitude"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:gravity=""
-                        android:text="2.4"
-                        android:textSize="24sp"
-                        style="@style/ItemMainText">
-                    </TextView>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"></Space>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp"
-                        android:gravity="center">
+                        android:padding="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -154,13 +141,6 @@
                             style="@style/ItemMainText">
                         </TextView>
                         <TextView
-                            android:id="@+id/northEqLatLon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0, 0"
-                            style="@style/ItemSubText">
-                        </TextView>
-                        <TextView
                             android:id="@+id/northEqDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -168,19 +148,16 @@
                             style="@style/ItemSubText">
                         </TextView>
                     </LinearLayout>
-                    <Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"></Space>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"></Space>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp"
-                        android:gravity="center">
+                        android:padding="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -195,13 +172,6 @@
                             style="@style/ItemMainText">
                         </TextView>
                         <TextView
-                            android:id="@+id/westEqLatLon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0, 0"
-                            style="@style/ItemSubText">
-                        </TextView>
-                        <TextView
                             android:id="@+id/westEqDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -209,13 +179,16 @@
                             style="@style/ItemSubText">
                         </TextView>
                     </LinearLayout>
-                    <Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"></Space>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp"
-                        android:gravity="center">
+                        android:padding="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -230,33 +203,23 @@
                             style="@style/ItemMainText">
                         </TextView>
                         <TextView
-                            android:id="@+id/eastEqLatLon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0, 0"
-                            style="@style/ItemSubText">
-                        </TextView>
-                        <TextView
-                            android:id="@+id/eastEqLDate"
+                            android:id="@+id/eastEqDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Date"
                             style="@style/ItemSubText">
                         </TextView>
                     </LinearLayout>
-                    <Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"></Space>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"></Space>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp"
-                        android:gravity="center">
+                        android:padding="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -271,13 +234,6 @@
                             style="@style/ItemMainText">
                         </TextView>
                         <TextView
-                            android:id="@+id/southEqLatLon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0, 0"
-                            style="@style/ItemSubText">
-                        </TextView>
-                        <TextView
                             android:id="@+id/southEqDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -285,7 +241,6 @@
                             style="@style/ItemSubText">
                         </TextView>
                     </LinearLayout>
-                    <Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"></Space>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -300,7 +255,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Largest Magnitude"
+                            android:text="Shallowest Depth"
                             style="@style/ItemHeader">
                         </TextView>
                         <TextView
@@ -318,16 +273,6 @@
                             style="@style/ItemSubText">
                         </TextView>
                     </LinearLayout>
-                    <TextView
-                        android:id="@+id/shallowestEqDepth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:gravity=""
-                        android:text="3km"
-                        android:textSize="24sp"
-                        style="@style/ItemMainText">
-                    </TextView>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -342,7 +287,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Largest Magnitude"
+                            android:text="Deepest Depth"
                             style="@style/ItemHeader">
                         </TextView>
                         <TextView
@@ -360,16 +305,6 @@
                             style="@style/ItemSubText">
                         </TextView>
                     </LinearLayout>
-                    <TextView
-                        android:id="@+id/deepestEqDepth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:gravity=""
-                        android:text="21km"
-                        android:textSize="24sp"
-                        style="@style/ItemMainText">
-                    </TextView>
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
