@@ -50,12 +50,12 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.detailedMap);
         mapFragment.getMapAsync(this);
+
+        startProgress();
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
+    public void onThreadComplete() {
         locationText.setText(earthquake.getLocation());
         magnitudeText.setText("Magnitude: " + earthquake.getMagnitude());
         dateText.setText(earthquake.getDate());
@@ -64,6 +64,11 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
         depthText.setText(earthquake.getDepthString());
 
         magnitudeText.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude(), getApplicationContext())));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     /**

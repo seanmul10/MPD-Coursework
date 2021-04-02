@@ -123,6 +123,13 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
 
         lastBuildDate = (TextView)findViewById(R.id.buildDate);
 
+        startProgress();
+    }
+
+    @Override
+    public void onThreadComplete() {
+        UpdateEarthquakeData();
+
         lastBuildDate.setText("Earthquake data correct as of " + EarthquakeData.getLastBuildDate());
     }
 
@@ -151,8 +158,8 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         else if (view == searchButton) {
             earthquakeRange = EarthquakeData.getEarthquakesInRange(getComparableDate(datePickerDialog1.getDatePicker()), getComparableDate(datePickerDialog2.getDatePicker()));
             Log.d("DateSearch", "Found " + earthquakeRange.size() + " earthquakes in the given range.");
-            UpdateEarthquakeData();
         }
+        UpdateEarthquakeData();
     }
 
     private void UpdateEarthquakeData() {
