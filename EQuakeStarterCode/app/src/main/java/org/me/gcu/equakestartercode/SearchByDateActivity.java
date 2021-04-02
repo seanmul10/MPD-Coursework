@@ -168,32 +168,32 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         Earthquake northernmostEarthquake = EarthquakeData.getMostNorthernEarthquake(earthquakeRange);
         northEqLocation.setText(northernmostEarthquake.getLocation());
         northEqDate.setText(northernmostEarthquake.getDate());
-        //northEqLatLon.setText(northernmostEarthquake.getLatitude() + ", " + northernmostEarthquake.getLongitude());
+        //northEqLatLon.setText(northernmostEarthquake.getLatLngString());
 
         Earthquake easternmostEarthquake = EarthquakeData.getMostEasterlyEarthquake(earthquakeRange);
         eastEqLocation.setText(easternmostEarthquake.getLocation());
         eastEqDate.setText(easternmostEarthquake.getDate());
-        //eastEqLatLon.setText(easternmostEarthquake.getLatitude() + ", " + easternmostEarthquake.getLongitude());
+        //eastEqLatLon.setText(easternmostEarthquake.getLatLngString());
 
         Earthquake southernmostEarthquake = EarthquakeData.getMostSoutherlyEarthquake(earthquakeRange);
         southEqLocation.setText(southernmostEarthquake.getLocation());
         southEqDate.setText(southernmostEarthquake.getDate());
-        //southEqLatLon.setText(southernmostEarthquake.getLatitude() + ", " + southernmostEarthquake.getLongitude());
+        //southEqLatLon.setText(southernmostEarthquake.getLatLngString());
 
         Earthquake westernmostEarthquake = EarthquakeData.getMostWesterlyEarthquake(earthquakeRange);
         westEqLocation.setText(westernmostEarthquake.getLocation());
         westEqDate.setText(westernmostEarthquake.getDate());
-        //westEqLatLon.setText(westernmostEarthquake.getLatitude() + ", " + westernmostEarthquake.getLongitude());
+        //westEqLatLon.setText(westernmostEarthquake.getLatLngString());
 
         Earthquake shallowestEarthquake = EarthquakeData.getShallowestEarthquake(earthquakeRange);
         shallowestEqLocation.setText(shallowestEarthquake.getLocation());
         shallowestEqDate.setText(shallowestEarthquake.getDate());
-        //shallowestEqDepth.setText(shallowestEarthquake.getDepth() + "km");
+        //shallowestEqDepth.setText(shallowestEarthquake.getDepthString());
 
         Earthquake deepestEarthquake = EarthquakeData.getDeepestEarthquake(earthquakeRange);
         deepestEqLocation.setText(deepestEarthquake.getLocation());
         deepestEqDate.setText(deepestEarthquake.getDate());
-        //deepestEqDepth.setText(deepestEarthquake.getDepth() + "km");
+        //deepestEqDepth.setText(deepestEarthquake.getDepthString());
     }
 
     private void SetEditText(TextView editText, Calendar calendar) {

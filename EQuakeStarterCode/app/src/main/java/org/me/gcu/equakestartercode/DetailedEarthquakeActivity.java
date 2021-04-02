@@ -60,8 +60,8 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
         magnitudeText.setText("Magnitude: " + earthquake.getMagnitude());
         dateText.setText(earthquake.getDate());
         timeText.setText(earthquake.getTime());
-        latLongText.setText(earthquake.getLatitude() + ", " + earthquake.getLongitude());
-        depthText.setText(earthquake.getDepth() + "km");
+        latLongText.setText(earthquake.getLatLngString());
+        depthText.setText(earthquake.getDepthString());
 
         magnitudeText.setBackgroundColor(Color.parseColor(MagnitudeColourCoding.getColour(earthquake.getMagnitude(), getApplicationContext())));
     }

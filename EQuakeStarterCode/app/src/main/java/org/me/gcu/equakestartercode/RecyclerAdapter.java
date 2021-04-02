@@ -111,7 +111,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 // Wait until the layout has finished switching once the orientation has changed
                 // This ensures there is no attempt to access the depth TextView while the TextView is null
             }
-            viewHolder.getEqDepth().setText(earthquake.getDepth() + "km");
+            viewHolder.getEqDepth().setText(earthquake.getDepthString());
         }
 
         // Alternate each items background colour

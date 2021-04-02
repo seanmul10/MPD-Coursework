@@ -83,6 +83,7 @@ public class Earthquake
     }
     public float getLatitude() { return latitude; }
     public float getLongitude() { return longitude; }
+    public String getLatLngString() { return Math.abs(latitude) + (latitude < 0 ? "°S" : "°N") + ", " + Math.abs(longitude) + (longitude < 0 ? "°W" : "°E"); }
     public void setLatLng(float latitude, float longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
@@ -92,6 +93,7 @@ public class Earthquake
     public int getDepth() {
         return depth;
     }
+    public String getDepthString() { return depth + "km"; }
     public void setDepth(int depth) {
         this.depth = depth;
     }
