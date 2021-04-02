@@ -2,6 +2,7 @@ package org.me.gcu.equakestartercode;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.util.Log;
 
 public class MagnitudeColourCoding
@@ -91,5 +92,13 @@ public class MagnitudeColourCoding
                 Math.round(g1 + t * (g2 - g1)),
                 Math.round(b1 + t * (b2 - b1))
         };
+    }
+
+    // Gets the corresponding colour value for the magnitude and then returns its hue; a value from 0 - 360
+    public static float getMagnitudeHue(float magnitude, Context context) {
+        int[] rgb = hexToRgb(getColour(magnitude, context));
+        float[] hsv = new float[3];
+        Color.RGBToHSV(rgb[0], rgb[1], rgb[2], hsv);
+        return Math.round(hsv[0]);
     }
 }

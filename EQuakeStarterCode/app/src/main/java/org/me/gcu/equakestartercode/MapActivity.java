@@ -15,6 +15,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -57,9 +59,12 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
 
         markerIDs = new String[earthquakeList.size()];
 
+        // Add a new marker with the correct colour
         for (int i = 0; i < earthquakeList.size(); i++) {
             LatLng latLng = new LatLng(earthquakeList.get(i).getLatitude(), earthquakeList.get(i).getLongitude());
-            Marker marker = map.addMarker(new MarkerOptions().position(latLng));
+            Marker marker = map.addMarker(new MarkerOptions()
+                    .position(latLng)
+                .icon(BitmapDescriptorFactory.defaultMarker(MagnitudeColourCoding.getMagnitudeHue(earthquakeList.get(i).getMagnitude(), this))));
             markerIDs[i] = marker.getId();
         }
 

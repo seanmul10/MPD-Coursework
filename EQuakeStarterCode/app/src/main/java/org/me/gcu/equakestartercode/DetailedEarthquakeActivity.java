@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -80,6 +81,9 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
 
         LatLng latLng = new LatLng(earthquake.getLatitude(), earthquake.getLongitude());
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8f));
-        map.addMarker(new MarkerOptions().position(latLng).title(earthquake.getLocation()).snippet(earthquake.getDate()));
+        map.addMarker(new MarkerOptions().position(latLng)
+                .icon(BitmapDescriptorFactory.defaultMarker(MagnitudeColourCoding.getMagnitudeHue(earthquake.getMagnitude(), this)))
+                .title(earthquake.getLocation())
+                .snippet(earthquake.getDate()));
     }
 }
