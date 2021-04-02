@@ -60,6 +60,8 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
 
     TextView lastBuildDate;
 
+    private final long millisecondsInDay = 86400000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +74,12 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         Calendar calendar = Calendar.getInstance();
         datePickerDialog1 = new DatePickerDialog(this, SearchByDateActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog2 = new DatePickerDialog(this, SearchByDateActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog1.getDatePicker().setMinDate(System.currentTimeMillis() - millisecondsInDay * 50);
+        datePickerDialog2.getDatePicker().setMaxDate(System.currentTimeMillis() - millisecondsInDay * 50);
+
+        datePickerDialog1.getDatePicker().setMaxDate(System.currentTimeMillis());
+        datePickerDialog2.getDatePicker().setMaxDate(System.currentTimeMillis());
 
         dateEditText1 = (TextView) findViewById(R.id.editText1);
         dateEditText2 = (TextView) findViewById(R.id.editText2);
