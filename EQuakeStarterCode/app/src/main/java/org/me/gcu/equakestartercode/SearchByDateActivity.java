@@ -76,7 +76,7 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         datePickerDialog2 = new DatePickerDialog(this, SearchByDateActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog1.getDatePicker().setMinDate(System.currentTimeMillis() - millisecondsInDay * 50);
-        datePickerDialog2.getDatePicker().setMaxDate(System.currentTimeMillis() - millisecondsInDay * 50);
+        datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - millisecondsInDay * 50);
 
         datePickerDialog1.getDatePicker().setMaxDate(System.currentTimeMillis());
         datePickerDialog2.getDatePicker().setMaxDate(System.currentTimeMillis());
