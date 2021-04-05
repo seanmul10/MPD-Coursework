@@ -14,7 +14,10 @@ import java.util.List;
 
 public class SearchResultsFragment extends Fragment implements View.OnClickListener
 {
-    private static List<Earthquake> earthquakes;
+    String startDate;
+    String endDate;
+
+    TextView searchResultsText;
 
     TextView largestEqLocation;
     TextView largestEqDate;
@@ -48,8 +51,9 @@ public class SearchResultsFragment extends Fragment implements View.OnClickListe
 
     }
 
-    public SearchResultsFragment(List<Earthquake> earthquakes) {
-        this.earthquakes = earthquakes;
+    public SearchResultsFragment(String startDate, String endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
@@ -61,6 +65,13 @@ public class SearchResultsFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            startDate = savedInstanceState.getString("startDate");
+            endDate = savedInstanceState.getString("endDate");
+        }
+
+        searchResultsText = (TextView)view.findViewById(R.id.searchResults);
+
         largestEqLocation = (TextView)view.findViewById(R.id.largestEqLocation);
         largestEqDate = (TextView)view.findViewById(R.id.largestEqDate);
         largestEqMagnitude = (TextView)view.findViewById(R.id.largestEqMagnitude);
@@ -98,6 +109,10 @@ public class SearchResultsFragment extends Fragment implements View.OnClickListe
     }
 
     public void update() {
+        List<Earthquake> earthquakes = EarthquakeData.getEarthquakesInRange(startDate, endDate);
+
+        searchResultsText.setText("Search returned " + earthquakes.size() + " earthquake(s) in the range of dates entered.");
+
         Earthquake largestEarthquake = EarthquakeData.getBiggestEarthquake(earthquakes);
         largestEqLocation.setText(largestEarthquake.getLocation());
         largestEqDate.setText(largestEarthquake.getDate());
@@ -132,5 +147,14 @@ public class SearchResultsFragment extends Fragment implements View.OnClickListe
         deepestEqLocation.setText(deepestEarthquake.getLocation());
         deepestEqDate.setText(deepestEarthquake.getDate());
         deepestEqDepth.setText(deepestEarthquake.getDepthString());
+    }
+
+    // Saves the start and end dates so they can be reused when the user rotates the device
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString("startDate", startDate);
+        savedInstanceState.putString("endDate", endDate);
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 }

@@ -14,12 +14,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class SearchByDateActivity extends EarthquakeActivity implements DatePickerDialog.OnDateSetListener, View.OnClickListener
 {
-    List<Earthquake> earthquakeRange;
-
     // Date search elements
     DatePickerDialog datePickerDialog1;
     DatePickerDialog datePickerDialog2;
@@ -28,9 +27,6 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
     TextView dateEditText2;
 
     Button searchButton;
-
-    // Earthquake text views
-    TextView searchResultsText;
 
     TextView lastBuildDate;
 
@@ -42,12 +38,16 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
 
         setContentView(R.layout.activity_date_search);
 
-        earthquakeRange = new ArrayList<>();
-
         // Date search elements
         Calendar calendar = Calendar.getInstance();
-        datePickerDialog1 = new DatePickerDialog(this, SearchByDateActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog2 = new DatePickerDialog(this, SearchByDateActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        if (savedInstanceState == null) {
+            datePickerDialog1 = new DatePickerDialog(this, SearchByDateActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+            datePickerDialog2 = new DatePickerDialog(this, SearchByDateActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        }
+        else {
+            datePickerDialog1 = new DatePickerDialog(this, SearchByDateActivity.this, savedInstanceState.getInt("year1"), savedInstanceState.getInt("month1"), savedInstanceState.getInt("day1"));
+            datePickerDialog2 = new DatePickerDialog(this, SearchByDateActivity.this, savedInstanceState.getInt("year2"), savedInstanceState.getInt("month2"), savedInstanceState.getInt("day2"));
+        }
 
         datePickerDialog1.getDatePicker().setMinDate(System.currentTimeMillis() - millisecondsInDay * 50);
         datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - millisecondsInDay * 50);
@@ -63,11 +63,10 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         dateEditText2.setOnClickListener(this);
         searchButton.setOnClickListener(this);
 
-        setEditText(dateEditText1, calendar);
-        setEditText(dateEditText2, calendar);
-
-        // Earthquake display elements
-        searchResultsText = (TextView)findViewById(R.id.searchResults);
+        DatePicker dp1 = datePickerDialog1.getDatePicker();
+        DatePicker dp2 = datePickerDialog2.getDatePicker();
+        setEditText(dateEditText1, dp1.getYear(), dp1.getMonth(), dp1.getDayOfMonth());
+        setEditText(dateEditText2, dp2.getYear(), dp2.getMonth(), dp2.getDayOfMonth());
 
         lastBuildDate = (TextView)findViewById(R.id.buildDate);
 
@@ -76,8 +75,6 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
 
     @Override
     public void onThreadComplete() {
-        updateEarthquakeData();
-
         lastBuildDate.setText("Earthquake data correct as of " + EarthquakeData.getLastBuildDate());
     }
 
@@ -104,34 +101,27 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
             datePickerDialog2.show();
         }
         else if (view == searchButton) {
-            earthquakeRange = EarthquakeData.getEarthquakesInRange(getComparableDate(datePickerDialog1.getDatePicker()), getComparableDate(datePickerDialog2.getDatePicker()));
-            Log.d("DateSearch", "Found " + earthquakeRange.size() + " earthquakes in the given range.");
-            if (earthquakeRange.size() == 0)
+            String startDate = getComparableDate(datePickerDialog1.getDatePicker());
+            String endDate = getComparableDate(datePickerDialog2.getDatePicker());
+            int earthquakeRangeSize = EarthquakeData.getEarthquakesInRange(startDate, endDate).size();
+
+            if (earthquakeRangeSize == 0)
                 displayAlertDialog("No earthquake data found", "No earthquake data was found in the given range. Try entering a different set of dates.", "Dismiss", android.R.drawable.ic_dialog_info);
-            updateEarthquakeData();
-            searchResultsText.setText("Search returned " + earthquakeRange.size() + " earthquake(s) in the range of dates entered.");
+            updateEarthquakeData(earthquakeRangeSize, startDate, endDate);
         }
     }
 
-    private void updateEarthquakeData() {
+    private void updateEarthquakeData(int rangeSize, String date1, String date2) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if (earthquakeRange.size() == 0) {
+        if (rangeSize == 0) {
             fragmentTransaction.replace(R.id.resultsFragment, new EmptyFragment());
         }
         else {
-            SearchResultsFragment searchResultsFragment = new SearchResultsFragment(earthquakeRange);
+            SearchResultsFragment searchResultsFragment = new SearchResultsFragment(date1, date2);
 
             fragmentTransaction.replace(R.id.resultsFragment, searchResultsFragment);
         }
         fragmentTransaction.commit();
-    }
-
-    private void setSearchResultsFragmentVisibility(Fragment fragment) {
-
-    }
-
-    private void setEditText(TextView editText, Calendar calendar) {
-        setEditText(editText, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 
     private void setEditText(TextView editText, int year, int month, int day) {
@@ -159,5 +149,18 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
 
     private String getComparableDate(DatePicker datePicker) {
         return datePicker.getYear() + ":" + String.format("%02d", datePicker.getMonth() + 1) + ":" + String.format("%02d", datePicker.getDayOfMonth());
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        savedInstanceState.putInt("year1", datePickerDialog1.getDatePicker().getYear());
+        savedInstanceState.putInt("month1", datePickerDialog1.getDatePicker().getMonth());
+        savedInstanceState.putInt("day1", datePickerDialog1.getDatePicker().getDayOfMonth());
+        savedInstanceState.putInt("year2", datePickerDialog2.getDatePicker().getYear());
+        savedInstanceState.putInt("month2", datePickerDialog2.getDatePicker().getMonth());
+        savedInstanceState.putInt("day2", datePickerDialog2.getDatePicker().getDayOfMonth());
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 }

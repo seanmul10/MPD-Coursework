@@ -6,6 +6,13 @@
     android:id="@+id/resultsFragment"
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:baselineAligned="false">
 
+    <TextView
+        android:id="@+id/searchResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="5dp"
+        style="@style/ItemSubText">
+    </TextView>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
