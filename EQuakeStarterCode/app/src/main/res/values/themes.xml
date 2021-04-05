@@ -44,4 +44,7 @@
     <style name="TertiaryBackground" parent="TextAppearance.AppCompat">
         <item name="android:background">@color/tertiary_light</item>
     </style>
+    <style name="ListDivider" parent="TextAppearance.AppCompat">
+        <item name="android:background">@color/grey</item>
+    </style>
 </resources>
