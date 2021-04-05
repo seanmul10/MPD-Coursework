@@ -93,7 +93,7 @@ public class Earthquake
     public int getDepth() {
         return depth;
     }
-    public String getDepthString() { return depth + "km"; }
+    public String getDepthString() { return depth + " km"; }
     public void setDepth(int depth) {
         this.depth = depth;
     }

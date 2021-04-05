@@ -2,15 +2,15 @@ package org.me.gcu.equakestartercode;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,33 +30,7 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
     Button searchButton;
 
     // Earthquake text views
-    TextView largestEqLocation;
-    TextView largestEqDate;
-    TextView largestEqMagnitude;
-
-    TextView northEqLocation;
-    TextView northEqDate;
-    TextView northEqLatLon;
-
-    TextView eastEqLocation;
-    TextView eastEqDate;
-    TextView eastEqLatLon;
-
-    TextView southEqLocation;
-    TextView southEqDate;
-    TextView southEqLatLon;
-
-    TextView westEqLocation;
-    TextView westEqDate;
-    TextView westEqLatLon;
-
-    TextView shallowestEqLocation;
-    TextView shallowestEqDate;
-    TextView shallowestEqDepth;
-
-    TextView deepestEqLocation;
-    TextView deepestEqDate;
-    TextView deepestEqDepth;
+    TextView searchResultsText;
 
     TextView lastBuildDate;
 
@@ -89,37 +63,11 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         dateEditText2.setOnClickListener(this);
         searchButton.setOnClickListener(this);
 
-        SetEditText(dateEditText1, calendar);
-        SetEditText(dateEditText2, calendar);
+        setEditText(dateEditText1, calendar);
+        setEditText(dateEditText2, calendar);
 
         // Earthquake display elements
-        largestEqLocation = (TextView)findViewById(R.id.largestEqLocation);
-        largestEqDate = (TextView)findViewById(R.id.largestEqDate);
-        //largestEqMagnitude = (TextView)findViewById(R.id.largestEqMagnitude);
-
-        northEqLocation = (TextView)findViewById(R.id.northEqLocation);;
-        northEqDate = (TextView)findViewById(R.id.northEqDate);
-        //northEqLatLon = (TextView)findViewById(R.id.northEqLatLon);
-
-        eastEqLocation = (TextView)findViewById(R.id.eastEqLocation);
-        eastEqDate = (TextView)findViewById(R.id.eastEqDate);
-        //eastEqLatLon = (TextView)findViewById(R.id.eastEqLatLon);
-
-        southEqLocation = (TextView)findViewById(R.id.southEqLocation);
-        southEqDate = (TextView)findViewById(R.id.southEqDate);
-        //southEqLatLon = (TextView)findViewById(R.id.southEqLatLon);
-
-        westEqLocation = (TextView)findViewById(R.id.westEqLocation);
-        westEqDate = (TextView)findViewById(R.id.westEqDate);
-        //westEqLatLon = (TextView)findViewById(R.id.westEqLatLon);
-
-        shallowestEqLocation = (TextView)findViewById(R.id.shallowestEqLocation);
-        shallowestEqDate = (TextView)findViewById(R.id.shallowestEqDate);
-        //shallowestEqDepth = (TextView)findViewById(R.id.shallowestEqDepth);
-
-        deepestEqLocation = (TextView)findViewById(R.id.deepestEqLocation);
-        deepestEqDate = (TextView)findViewById(R.id.deepestEqDate);
-        //deepestEqDepth = (TextView)findViewById(R.id.deepestEqDepth);
+        searchResultsText = (TextView)findViewById(R.id.searchResults);
 
         lastBuildDate = (TextView)findViewById(R.id.buildDate);
 
@@ -128,7 +76,7 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
 
     @Override
     public void onThreadComplete() {
-        UpdateEarthquakeData();
+        updateEarthquakeData();
 
         lastBuildDate.setText("Earthquake data correct as of " + EarthquakeData.getLastBuildDate());
     }
@@ -136,14 +84,14 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         if (isDatesInvalid()) {
-            displayAlertDialog("Invalid date entered", "End date must be on or after the start date.", "Dismiss");
+            displayAlertDialog("Invalid date entered", "End date must be on or after the start date.", "Dismiss", android.R.drawable.ic_dialog_alert);
             return;
         }
         if (datePicker == datePickerDialog1.getDatePicker()) {
-            SetEditText(dateEditText1, year, month, day);
+            setEditText(dateEditText1, year, month, day);
         }
         else if (datePicker == datePickerDialog2.getDatePicker()) {
-            SetEditText(dateEditText2, year, month, day);
+            setEditText(dateEditText2, year, month, day);
         }
     }
 
@@ -158,56 +106,35 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         else if (view == searchButton) {
             earthquakeRange = EarthquakeData.getEarthquakesInRange(getComparableDate(datePickerDialog1.getDatePicker()), getComparableDate(datePickerDialog2.getDatePicker()));
             Log.d("DateSearch", "Found " + earthquakeRange.size() + " earthquakes in the given range.");
+            if (earthquakeRange.size() == 0)
+                displayAlertDialog("No earthquake data found", "No earthquake data was found in the given range. Try entering a different set of dates.", "Dismiss", android.R.drawable.ic_dialog_info);
+            updateEarthquakeData();
+            searchResultsText.setText("Search returned " + earthquakeRange.size() + " earthquake(s) in the range of dates entered.");
         }
-        UpdateEarthquakeData();
     }
 
-    private void UpdateEarthquakeData() {
+    private void updateEarthquakeData() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (earthquakeRange.size() == 0) {
-            // No earthquakes found in this range
-            return;
+            fragmentTransaction.replace(R.id.resultsFragment, new EmptyFragment());
         }
-        Earthquake largestEarthquake = EarthquakeData.getBiggestEarthquake(earthquakeRange);
-        largestEqLocation.setText(largestEarthquake.getLocation());
-        largestEqDate.setText(largestEarthquake.getDate());
-        //largestEqMagnitude.setText(Float.toString(largestEarthquake.getMagnitude()));
+        else {
+            SearchResultsFragment searchResultsFragment = new SearchResultsFragment(earthquakeRange);
 
-        Earthquake northernmostEarthquake = EarthquakeData.getMostNorthernEarthquake(earthquakeRange);
-        northEqLocation.setText(northernmostEarthquake.getLocation());
-        northEqDate.setText(northernmostEarthquake.getDate());
-        //northEqLatLon.setText(northernmostEarthquake.getLatLngString());
-
-        Earthquake easternmostEarthquake = EarthquakeData.getMostEasterlyEarthquake(earthquakeRange);
-        eastEqLocation.setText(easternmostEarthquake.getLocation());
-        eastEqDate.setText(easternmostEarthquake.getDate());
-        //eastEqLatLon.setText(easternmostEarthquake.getLatLngString());
-
-        Earthquake southernmostEarthquake = EarthquakeData.getMostSoutherlyEarthquake(earthquakeRange);
-        southEqLocation.setText(southernmostEarthquake.getLocation());
-        southEqDate.setText(southernmostEarthquake.getDate());
-        //southEqLatLon.setText(southernmostEarthquake.getLatLngString());
-
-        Earthquake westernmostEarthquake = EarthquakeData.getMostWesterlyEarthquake(earthquakeRange);
-        westEqLocation.setText(westernmostEarthquake.getLocation());
-        westEqDate.setText(westernmostEarthquake.getDate());
-        //westEqLatLon.setText(westernmostEarthquake.getLatLngString());
-
-        Earthquake shallowestEarthquake = EarthquakeData.getShallowestEarthquake(earthquakeRange);
-        shallowestEqLocation.setText(shallowestEarthquake.getLocation());
-        shallowestEqDate.setText(shallowestEarthquake.getDate());
-        //shallowestEqDepth.setText(shallowestEarthquake.getDepthString());
-
-        Earthquake deepestEarthquake = EarthquakeData.getDeepestEarthquake(earthquakeRange);
-        deepestEqLocation.setText(deepestEarthquake.getLocation());
-        deepestEqDate.setText(deepestEarthquake.getDate());
-        //deepestEqDepth.setText(deepestEarthquake.getDepthString());
+            fragmentTransaction.replace(R.id.resultsFragment, searchResultsFragment);
+        }
+        fragmentTransaction.commit();
     }
 
-    private void SetEditText(TextView editText, Calendar calendar) {
-        SetEditText(editText, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+    private void setSearchResultsFragmentVisibility(Fragment fragment) {
+
     }
 
-    private void SetEditText(TextView editText, int year, int month, int day) {
+    private void setEditText(TextView editText, Calendar calendar) {
+        setEditText(editText, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+    }
+
+    private void setEditText(TextView editText, int year, int month, int day) {
         editText.setText(String.format("%02d", day) + "/" + String.format("%02d", month + 1) + "/" + year);
     }
 
@@ -220,13 +147,13 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         return false;
     }
 
-    private void displayAlertDialog(String title, String message, String negativeButton) {
+    private void displayAlertDialog(String title, String message, String negativeButton, int icon) {
         new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message)
 
                 .setNegativeButton(negativeButton, null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(icon)
                 .show();
     }
 
