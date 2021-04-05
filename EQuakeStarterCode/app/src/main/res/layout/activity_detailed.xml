@@ -15,7 +15,7 @@
             android:id="@+id/heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recent UK Earthquakes"
+            android:text="@string/app_name"
             style="@style/PrimaryText">
         </TextView>
         <TextView
@@ -43,11 +43,10 @@
     </RelativeLayout>
 
     <fragment
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/detailedMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         tools:context=".MapActivity">
     </fragment>
@@ -72,7 +71,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -82,7 +82,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date"
+                    android:text="@string/detailed_date"
                     style="@style/ItemHeader">
                 </TextView>
                 <TextView
@@ -103,7 +103,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Time"
+                    android:text="@string/detailed_time"
                     style="@style/ItemHeader">
                 </TextView>
                 <TextView
@@ -119,9 +119,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:baselineAligned="false">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -131,7 +132,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Location"
+                    android:text="@string/detailed_lat_long"
                     style="@style/ItemHeader">
                 </TextView>
                 <TextView
@@ -152,7 +153,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Depth"
+                    android:text="@string/detailed_depth"
                     style="@style/ItemHeader">
                 </TextView>
                 <TextView

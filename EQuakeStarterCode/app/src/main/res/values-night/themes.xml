@@ -10,7 +10,6 @@
         <item name="colorOnSecondary">@color/off_white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
     <!-- Text styles -->
     <style name="PrimaryText" parent="TextAppearance.AppCompat">

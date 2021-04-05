@@ -1,11 +1,32 @@
 <resources>
     <string name="app_name">Recent UK Earthquakes</string>
-    <string name="recycler_view_button">Earthquake List</string>
+    <string name="recycler_view_button">List View</string>
     <string name="search_by_date_button">Search by Date</string>
-    <string name="map_view_button">Location Map</string>
+    <string name="map_view_button">Map View</string>
+    <string name="acknowledgement">Contains British Geological Survey materials © NERC 2021</string>
+    <string name="build_date">Earthquake data accurate as of </string>
+    <string name="recycler_view_location">Earthquake</string>
+    <string name="recycler_view_magnitude">Magnitude</string>
+    <string name="recycler_view_depth">Depth</string>
+    <string name="detailed_date">Date</string>
+    <string name="detailed_lat_long">Location</string>
+    <string name="detailed_time">Time</string>
+    <string name="detailed_depth">Depth</string>
+    <string name="start_date">From: </string>
+    <string name="end_date">To: </string>
+    <string name="search_button">Search</string>
+    <string name="search_largest">Largest Magnitude</string>
+    <string name="search_most_northerly">Most Northerly</string>
+    <string name="search_most_easterly">Most Easterly</string>
+    <string name="search_most_southerly">Most Southerly</string>
+    <string name="search_most_westerly">Most Westerly</string>
+    <string name="search_shallowest">Shallowest Depth</string>
+    <string name="search_deepest">Deepest Depth</string>
     <string name="start_lat">55</string>
     <string name="start_lon">-3.7</string>
     <string name="start_zoom">5.1</string>
+    <string name="refresh_button">Refresh</string>
+    <string name="sort_heading">Sort</string>
     <string-array name="sort_modes">
         <item>By date (Descending)</item>
         <item>By date (Ascending)</item>

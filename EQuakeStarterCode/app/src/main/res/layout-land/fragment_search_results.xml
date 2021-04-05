@@ -15,30 +15,30 @@
     </TextView>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingVertical="5dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="10dp"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:paddingRight="10dp">
+                    android:paddingEnd="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Largest Magnitude"
+                        android:text="@string/search_largest"
                         style="@style/ItemHeader">
                     </TextView>
                     <TextView
@@ -82,17 +82,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="10dp"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:paddingRight="10dp">
+                    android:paddingEnd="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Most Northerly"
+                        android:text="@string/search_most_northerly"
                         style="@style/ItemHeader">
                     </TextView>
                     <TextView
@@ -136,17 +137,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="10dp"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:paddingRight="10dp">
+                    android:paddingEnd="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Most Easterly"
+                        android:text="@string/search_most_easterly"
                         style="@style/ItemHeader">
                     </TextView>
                     <TextView
@@ -190,17 +192,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="10dp"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:paddingRight="10dp">
+                    android:paddingEnd="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Most Southerly"
+                        android:text="@string/search_most_southerly"
                         style="@style/ItemHeader">
                     </TextView>
                     <TextView
@@ -244,17 +247,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="10dp"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:paddingRight="10dp">
+                    android:paddingEnd="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Most Westerly"
+                        android:text="@string/search_most_westerly"
                         style="@style/ItemHeader">
                     </TextView>
                     <TextView
@@ -298,17 +302,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="10dp"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:paddingRight="10dp">
+                    android:paddingEnd="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Shallowest Depth"
+                        android:text="@string/search_shallowest"
                         style="@style/ItemHeader">
                     </TextView>
                     <TextView
@@ -352,17 +357,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="10dp"
+                android:baselineAligned="false">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:paddingRight="10dp">
+                    android:paddingEnd="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Deepest Depth"
+                        android:text="@string/search_deepest"
                         style="@style/ItemHeader">
                     </TextView>
                     <TextView

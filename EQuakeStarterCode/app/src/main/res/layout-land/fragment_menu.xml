@@ -2,25 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    style="@style/TertiaryBackground">
+    android:orientation="horizontal">
 
     <Button
         android:id="@+id/listViewButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="List"
-        android:layout_weight="1"/>
+        android:text="@string/recycler_view_button"
+        android:layout_weight="1">
+    </Button>
     <Button
         android:id="@+id/dateRangeButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Search in Range"
-        android:layout_weight="1"/>
+        android:text="@string/search_by_date_button"
+        android:layout_weight="1">
+    </Button>
     <Button
         android:id="@+id/mapButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Map"
-        android:layout_weight="1"/>
+        android:text="@string/map_view_button"
+        android:layout_weight="1">
+    </Button>
 </LinearLayout>
