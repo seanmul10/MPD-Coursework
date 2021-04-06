@@ -147,7 +147,7 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         String date1 = getComparableDate(datePickerDialog1.getDatePicker());
         String date2 = getComparableDate(datePickerDialog2.getDatePicker());
 
-        if (date1.compareToIgnoreCase(date2) > 0)
+        if (radio1.isChecked() && date1.compareToIgnoreCase(date2) > 0)
             return true;
         return false;
     }
