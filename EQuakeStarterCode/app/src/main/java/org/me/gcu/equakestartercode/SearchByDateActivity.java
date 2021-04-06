@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentTransaction;
@@ -25,6 +28,11 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
 
     TextView dateEditText1;
     TextView dateEditText2;
+    LinearLayout endDateLayout;
+
+    RadioGroup radioGroup;
+    RadioButton radio1;
+    RadioButton radio2;
 
     Button searchButton;
 
@@ -57,16 +65,25 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
 
         dateEditText1 = (TextView) findViewById(R.id.editText1);
         dateEditText2 = (TextView) findViewById(R.id.editText2);
+        endDateLayout = (LinearLayout) findViewById(R.id.endDateLayout);
+
         searchButton = (Button) findViewById(R.id.searchButton);
+
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radio1 = (RadioButton) findViewById(R.id.radioDateRange);
+        radio2 = (RadioButton) findViewById(R.id.radioSingleDate);
 
         dateEditText1.setOnClickListener(this);
         dateEditText2.setOnClickListener(this);
         searchButton.setOnClickListener(this);
+        radioGroup.setOnCheckedChangeListener((radioGroup, i) -> endDateLayout.setVisibility(radio1.isChecked() ? View.VISIBLE : View.INVISIBLE));
 
         DatePicker dp1 = datePickerDialog1.getDatePicker();
         DatePicker dp2 = datePickerDialog2.getDatePicker();
         setEditText(dateEditText1, dp1.getYear(), dp1.getMonth(), dp1.getDayOfMonth());
         setEditText(dateEditText2, dp2.getYear(), dp2.getMonth(), dp2.getDayOfMonth());
+
+        radio1.setChecked(true);
 
         lastBuildDate = (TextView)findViewById(R.id.buildDate);
     }
@@ -100,7 +117,7 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         }
         else if (view == searchButton) {
             String startDate = getComparableDate(datePickerDialog1.getDatePicker());
-            String endDate = getComparableDate(datePickerDialog2.getDatePicker());
+            String endDate = radio1.isChecked() ? getComparableDate(datePickerDialog2.getDatePicker()) : startDate;
             int earthquakeRangeSize = EarthquakeData.getEarthquakesInRange(startDate, endDate).size();
 
             if (earthquakeRangeSize == 0)
@@ -158,6 +175,7 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         savedInstanceState.putInt("year2", datePickerDialog2.getDatePicker().getYear());
         savedInstanceState.putInt("month2", datePickerDialog2.getDatePicker().getMonth());
         savedInstanceState.putInt("day2", datePickerDialog2.getDatePicker().getDayOfMonth());
+        savedInstanceState.putBoolean("radioBool", radio1.isChecked());
 
         super.onSaveInstanceState(savedInstanceState);
     }

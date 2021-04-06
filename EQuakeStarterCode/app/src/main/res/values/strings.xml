@@ -14,6 +14,8 @@
     <string name="detailed_depth">Depth</string>
     <string name="start_date">From: </string>
     <string name="end_date">To: </string>
+    <string name="radio_date_range">Date Range</string>
+    <string name="radio_single_date">Single Date</string>
     <string name="search_button">Search</string>
     <string name="search_largest">Largest Magnitude</string>
     <string name="search_most_northerly">Most Northerly</string>

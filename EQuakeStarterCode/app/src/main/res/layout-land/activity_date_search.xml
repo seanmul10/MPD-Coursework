@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
         <LinearLayout
+            android:id="@+id/endDateLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center">
@@ -87,7 +88,33 @@
                 style="@style/PrimaryText">
             </TextView>
         </LinearLayout>
-
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <RadioButton
+                android:id="@+id/radioDateRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/radio_date_range"
+                style="@style/ItemHeader">
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/radioSingleDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/radio_single_date"
+                style="@style/ItemHeader">
+            </RadioButton>
+        </RadioGroup>
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
