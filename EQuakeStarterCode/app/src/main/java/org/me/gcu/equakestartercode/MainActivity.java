@@ -63,7 +63,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
     public void onClick(View view)
     {
         if (view == refreshButton) {
-            startProgress();
+            startTask();
         }
     }
 
@@ -71,7 +71,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         currentSortMode = SortMode.getSortMode(position);
-        startProgress();
+        startTask();
     }
 
     public void onNothingSelected(AdapterView<?> parent) { }

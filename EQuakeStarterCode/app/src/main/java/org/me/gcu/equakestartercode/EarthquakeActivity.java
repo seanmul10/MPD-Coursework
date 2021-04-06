@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
@@ -24,9 +25,27 @@ import java.util.List;
 
 public abstract class EarthquakeActivity extends FragmentActivity {
 
-    private String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
+    private final String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
+    private final int updateDelay = 300000;
 
     private static boolean isDataParsed = false; // Ensures the data isn't tried to be parsed again needlessly
+
+    // Thread handler and runnable used to call the startTask() method periodically
+    private Handler threadHandler = new Handler();
+    private Runnable runTaskPeriodically = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                startTask();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                threadHandler.postDelayed(this, updateDelay);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,7 +65,7 @@ public abstract class EarthquakeActivity extends FragmentActivity {
             onAsyncTaskComplete();
         }
         else {
-            startProgress();
+            threadHandler.post(runTaskPeriodically);
         }
     }
 
@@ -62,14 +81,13 @@ public abstract class EarthquakeActivity extends FragmentActivity {
         return (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
+    public abstract void onAsyncTaskComplete();
+
     // Standard method used to get and display earthquake data
-    public void startProgress()
-    {
+    public void startTask() {
         AsyncGetDataTask aSyncTask = new AsyncGetDataTask();
         aSyncTask.execute(urlSource);
     }
-
-    public abstract void onAsyncTaskComplete();
 
     private class AsyncGetDataTask extends android.os.AsyncTask<String, String, String> {
         @Override
