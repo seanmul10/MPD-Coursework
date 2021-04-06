@@ -50,12 +50,10 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.detailedMap);
         mapFragment.getMapAsync(this);
-
-        startProgress();
     }
 
     @Override
-    public void onThreadComplete() {
+    public void onAsyncTaskComplete() {
         locationText.setText(earthquake.getLocation());
         magnitudeText.setText("Magnitude: " + earthquake.getMagnitude());
         dateText.setText(earthquake.getDate());

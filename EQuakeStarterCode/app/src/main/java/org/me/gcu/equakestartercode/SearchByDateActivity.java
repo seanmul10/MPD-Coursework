@@ -69,12 +69,10 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
         setEditText(dateEditText2, dp2.getYear(), dp2.getMonth(), dp2.getDayOfMonth());
 
         lastBuildDate = (TextView)findViewById(R.id.buildDate);
-
-        startProgress();
     }
 
     @Override
-    public void onThreadComplete() {
+    public void onAsyncTaskComplete() {
         lastBuildDate.setText("Earthquake data correct as of " + EarthquakeData.getLastBuildDate());
     }
 

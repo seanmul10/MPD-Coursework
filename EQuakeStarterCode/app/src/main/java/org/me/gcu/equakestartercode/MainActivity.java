@@ -41,7 +41,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
 
     private TextView lastBuildDateText;
 
-    private SortMode currentSortMode;
+    private static SortMode currentSortMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,7 +51,6 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         setContentView(R.layout.activity_main);
 
         // Set up the raw links to the graphical components
-
         sortSpinner = (Spinner)findViewById(R.id.sortSpinner);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.sort_modes, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,21 +66,21 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         recyclerView.setAdapter(recyclerAdapter);
 
         lastBuildDateText = (TextView)findViewById(R.id.buildDate);
-
-        startProgress();
     }
 
     @Override
-    public void onThreadComplete() {
+    public void onAsyncTaskComplete() {
+        EarthquakeData.sort(currentSortMode);
+
         recyclerAdapter.notifyDataSetChanged();
 
-        lastBuildDateText.setText("Earthquake data correct as of " + EarthquakeData.getLastBuildDate());
+        lastBuildDateText.setText(getResources().getString(R.string.build_date) + " " +  EarthquakeData.getLastBuildDate());
     }
 
     public void onClick(View view)
     {
         if (view == refreshButton) {
-            startProgress(currentSortMode);
+            startProgress();
         }
     }
 
@@ -89,7 +88,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         currentSortMode = SortMode.getSortMode(position);
-        startProgress(currentSortMode);
+        startProgress();
     }
 
     public void onNothingSelected(AdapterView<?> parent) { }

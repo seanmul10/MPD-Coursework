@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
@@ -28,6 +26,8 @@ public abstract class EarthquakeActivity extends FragmentActivity {
 
     private String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
 
+    private static boolean isDataParsed = false; // Ensures the data isn't tried to be parsed again needlessly
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,6 +36,18 @@ public abstract class EarthquakeActivity extends FragmentActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.menuFragmentPlaceholder, new MenuFragment());
         fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (isDataParsed) {
+            onAsyncTaskComplete();
+        }
+        else {
+            startProgress();
+        }
     }
 
     public void startDetailedViewActivity(int index) {
@@ -50,47 +62,27 @@ public abstract class EarthquakeActivity extends FragmentActivity {
         return (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
-    // Standard method used to get and display earthquake data, sorts the data by date descending by default
+    // Standard method used to get and display earthquake data
     public void startProgress()
     {
-        startProgress(SortMode.DATE_DESCENDING);
+        AsyncGetDataTask aSyncTask = new AsyncGetDataTask();
+        aSyncTask.execute(urlSource);
     }
 
-    // Gets and displays the earthquake data and sorts it using the specified sort mode
-    public void startProgress(SortMode sortMode)
-    {
-        // Run network access on a separate thread;
-        new Thread(new Task(urlSource, sortMode)).start();
-    }
+    public abstract void onAsyncTaskComplete();
 
-    private Handler threadHandler = new Handler() {
+    private class AsyncGetDataTask extends android.os.AsyncTask<String, String, String> {
         @Override
-        public void handleMessage(Message msg) {
-            onThreadComplete();
+        protected void onPreExecute() {
+            super.onPreExecute();
         }
-    };
 
-    public abstract void onThreadComplete();
-
-    // Need separate thread to access the internet resource over network
-    // Other neater solutions should be adopted in later iterations.
-    private class Task implements Runnable
-    {
-        private String urlSource;
-        private SortMode sortMode;
-
-        public Task(String urlSource, SortMode sortMode)
-        {
-            this.urlSource = urlSource;
-            this.sortMode = sortMode;
-        }
         @Override
-        public void run()
-        {
+        protected String doInBackground(String... params) {
             String rawData = ""; // This is the data that will be parsed and put into the earthquake array
             try
             {
-                URL url = new URL(urlSource);
+                URL url = new URL(params[0]);
                 URLConnection connection = url.openConnection();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
@@ -101,27 +93,22 @@ public abstract class EarthquakeActivity extends FragmentActivity {
                 }
                 reader.close();
             }
-            catch (IOException ae)
+            catch (IOException e)
             {
-                Log.e("MyTag", "ioexception in run");
+                e.printStackTrace();
+                Log.e("Threading", "Error retrieving data from url source: " + params[0]);
             }
 
-            // Parse the data and store it in the EarthquakeData class
+            return rawData;
+        }
+
+        @Override
+        protected void onPostExecute(String rawData) {
+            if (rawData == "")
+                return;
             parseData(rawData);
-
-            // Now update the TextView to display raw XML data
-            // Probably not the best way to update TextView
-            // but we are just getting started !
-
-            EarthquakeActivity.this.runOnUiThread(new Runnable()
-            {
-                public void run() {
-                    Log.d("UI thread", "I am the UI thread");
-
-                    EarthquakeData.sort(sortMode);
-                    threadHandler.sendEmptyMessage(0);
-                }
-            });
+            onAsyncTaskComplete();
+            isDataParsed = true;
         }
 
         // Takes raw data as an input and returns an array of earthquakes

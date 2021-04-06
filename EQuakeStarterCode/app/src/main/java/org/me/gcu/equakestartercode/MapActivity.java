@@ -39,12 +39,10 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        startProgress();
     }
 
     @Override
-    public void onThreadComplete() {
+    public void onAsyncTaskComplete() {
 
     }
 
@@ -65,7 +63,6 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
         List<Earthquake> earthquakeList = EarthquakeData.getEarthquakes();
 
         markerIDs = new String[earthquakeList.size()];
-
         // Add a new marker with the correct colour
         for (int i = 0; i < earthquakeList.size(); i++) {
             LatLng latLng = new LatLng(earthquakeList.get(i).getLatitude(), earthquakeList.get(i).getLongitude());
