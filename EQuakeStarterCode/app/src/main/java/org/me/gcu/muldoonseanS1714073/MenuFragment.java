@@ -1,4 +1,8 @@
-package org.me.gcu.equakestartercode;
+// Code written by Sean Muldoon
+// S1714073
+// Mobile Platform Development coursework submission
+
+package org.me.gcu.muldoonseanS1714073;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
-
-import org.me.gcu.equakestartercode.R;
 
 public class MenuFragment extends Fragment implements View.OnClickListener
 {

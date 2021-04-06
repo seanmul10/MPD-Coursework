@@ -1,4 +1,8 @@
-package org.me.gcu.equakestartercode;
+// Code written by Sean Muldoon
+// S1714073
+// Mobile Platform Development coursework submission
+
+package org.me.gcu.muldoonseanS1714073;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
