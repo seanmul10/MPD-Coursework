@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId 'org.me.gcu.equakestartercode'
+        applicationId 'org.me.gcu.muldoonseanS1714073'
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
