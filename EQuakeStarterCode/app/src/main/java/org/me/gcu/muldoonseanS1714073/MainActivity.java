@@ -1,4 +1,8 @@
-package org.me.gcu.equakestartercode;
+// Code written by Sean Muldoon
+// S1714073
+// Mobile Platform Development coursework submission
+
+package org.me.gcu.muldoonseanS1714073;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

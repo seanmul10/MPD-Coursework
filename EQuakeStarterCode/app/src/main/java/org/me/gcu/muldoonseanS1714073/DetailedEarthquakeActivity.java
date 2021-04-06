@@ -1,11 +1,12 @@
-package org.me.gcu.equakestartercode;
+// Code written by Sean Muldoon
+// S1714073
+// Mobile Platform Development coursework submission
+
+package org.me.gcu.muldoonseanS1714073;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

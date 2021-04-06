@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Layouts designed by Sean Muldoon
+S1714073
+Mobile Platform Development coursework submission -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -33,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:context=".MapActivity">
+        tools:context="org.me.gcu.muldoonseanS1714073.MapActivity">
     </fragment>
 
     <FrameLayout

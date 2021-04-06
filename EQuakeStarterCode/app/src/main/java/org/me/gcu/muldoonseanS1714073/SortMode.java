@@ -1,4 +1,8 @@
-package org.me.gcu.equakestartercode;
+// Code written by Sean Muldoon
+// S1714073
+// Mobile Platform Development coursework submission
+
+package org.me.gcu.muldoonseanS1714073;
 
 public enum SortMode {
     MAGNITUDE_ASCENDING, MAGNITUDE_DESCENDING, DATE_ASCENDING, DATE_DESCENDING, ALPHABETICAL_ASCENDING, ALPHABETICAL_DESCENDING, DEPTH_ASCENDING, DEPTH_DESCENDING;
