@@ -3,21 +3,15 @@ package org.me.gcu.equakestartercode;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
-import java.util.List;
-
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class ListRecyclerAdapter extends RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder> {
 
     private static RecyclerClickListener clickListener;
 
@@ -25,7 +19,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     private boolean darkMode;
 
-    public RecyclerAdapter(Context context, RecyclerClickListener clickListener)
+    public ListRecyclerAdapter(Context context, RecyclerClickListener clickListener)
     {
         this.context = context;
         this.clickListener = clickListener;

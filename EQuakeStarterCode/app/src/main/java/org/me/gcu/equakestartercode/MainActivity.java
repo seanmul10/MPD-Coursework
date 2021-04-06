@@ -5,35 +5,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.URL;
-import java.net.URLConnection;
-
-import java.util.*;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
 public class MainActivity extends EarthquakeActivity implements OnClickListener, AdapterView.OnItemSelectedListener, RecyclerClickListener
 {
-    private RecyclerAdapter recyclerAdapter;
+    private ListRecyclerAdapter recyclerAdapter;
     private RecyclerView recyclerView;
 
     private Spinner sortSpinner;
@@ -61,7 +44,7 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         refreshButton.setOnClickListener(this);
 
         recyclerView = (RecyclerView)findViewById(R.id.eqRecyclerView);
-        recyclerAdapter = new RecyclerAdapter(getApplicationContext(), this);
+        recyclerAdapter = new ListRecyclerAdapter(getApplicationContext(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(recyclerAdapter);
 
