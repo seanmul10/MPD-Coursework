@@ -32,6 +32,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
+        public int index;
         private TextView eqHeader;
         private TextView eqLocation;
         private TextView eqDateTime;
@@ -60,7 +61,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
         @Override
         public void onClick(View view) {
-            clickListener.onRecyclerItemClicked(view, this.getAdapterPosition());
+            clickListener.onRecyclerItemClicked(view, index);
         }
     }
 
@@ -117,6 +118,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
                 viewHolder.getEqData().setText(earthquake.getDepthString());
                 break;
         }
+        viewHolder.index = EarthquakeData.getEarthquakeIndex(earthquake);
         viewHolder.getEqLocation().setText(earthquake.getLocation());
         viewHolder.getEqDateTime().setText(earthquake.getDate());
     }

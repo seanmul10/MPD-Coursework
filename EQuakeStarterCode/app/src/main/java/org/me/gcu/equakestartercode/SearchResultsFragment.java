@@ -62,8 +62,9 @@ public class SearchResultsFragment extends Fragment implements RecyclerClickList
     }
 
     @Override
-    public void onRecyclerItemClicked(View view, int position) {
-
+    public void onRecyclerItemClicked(View view, int index) {
+        EarthquakeActivity activity = (EarthquakeActivity)getActivity();
+        activity.startDetailedViewActivity(index);
     }
 
     public void update() {

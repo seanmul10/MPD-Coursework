@@ -25,6 +25,15 @@ public class EarthquakeData {
         return _lastBuildDate;
     }
 
+    public static int getEarthquakeIndex(Earthquake earthquake) {
+        for (int i = 0; i < _earthquakes.size(); i++) {
+            if (earthquake == _earthquakes.get(i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     // Sorts the array of earthquakes using a specified sorting method
     public static void sort(SortMode sortMode) {
         boolean isSorted = false;
