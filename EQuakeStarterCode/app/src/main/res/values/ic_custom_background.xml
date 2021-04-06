@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Layouts designed by Sean Muldoon
-S1714073
-Mobile Platform Development coursework submission -->
 <resources>
     <color name="ic_custom_background">#2A65E5</color>
 </resources>

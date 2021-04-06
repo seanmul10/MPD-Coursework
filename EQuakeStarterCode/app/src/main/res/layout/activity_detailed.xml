@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Layouts designed by Sean Muldoon
-S1714073
-Mobile Platform Development coursework submission -->
+<!--  MPD XML Starter code Semester B Session 2018 2019  -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -50,7 +48,7 @@ Mobile Platform Development coursework submission -->
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:context="org.me.gcu.muldoonseanS1714073.MapActivity">
+        tools:context=".MapActivity">
     </fragment>
 
     <LinearLayout

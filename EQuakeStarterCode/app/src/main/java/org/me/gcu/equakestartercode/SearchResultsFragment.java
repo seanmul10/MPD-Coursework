@@ -1,13 +1,15 @@
-// Code written by Sean Muldoon
-// S1714073
-// Mobile Platform Development coursework submission
+package org.me.gcu.equakestartercode;
 
-package org.me.gcu.muldoonseanS1714073;
-
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;

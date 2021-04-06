@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--  Project by Sean Muldoon
-S1714073
-Mobile Platform Development coursework submission -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.me.gcu.muldoonseanS1714073">
+    package="org.me.gcu.equakestartercode">
 
     <!--
      The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -32,7 +29,7 @@ Mobile Platform Development coursework submission -->
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <activity
-            android:name="org.me.gcu.muldoonseanS1714073.MainActivity">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,7 +37,7 @@ Mobile Platform Development coursework submission -->
             </intent-filter>
         </activity>
         <activity
-            android:name="org.me.gcu.muldoonseanS1714073.SearchByDateActivity">
+            android:name=".SearchByDateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +45,7 @@ Mobile Platform Development coursework submission -->
             </intent-filter>
         </activity>
         <activity
-            android:name="org.me.gcu.muldoonseanS1714073.MapActivity">
+            android:name=".MapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,7 +53,7 @@ Mobile Platform Development coursework submission -->
             </intent-filter>
         </activity>
         <activity
-            android:name="org.me.gcu.muldoonseanS1714073.DetailedEarthquakeActivity">
+            android:name=".DetailedEarthquakeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

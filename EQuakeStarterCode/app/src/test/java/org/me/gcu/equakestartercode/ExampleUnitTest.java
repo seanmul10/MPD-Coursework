@@ -1,4 +1,4 @@
-package org.me.gcu.muldoonseanS1714073;
+package org.me.gcu.equakestartercode;
 
 import org.junit.Test;
 

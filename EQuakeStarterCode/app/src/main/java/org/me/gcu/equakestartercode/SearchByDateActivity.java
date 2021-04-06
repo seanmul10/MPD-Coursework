@@ -1,12 +1,10 @@
-// Code written by Sean Muldoon
-// S1714073
-// Mobile Platform Development coursework submission
-
-package org.me.gcu.muldoonseanS1714073;
+package org.me.gcu.equakestartercode;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,7 +15,10 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class SearchByDateActivity extends EarthquakeActivity implements DatePickerDialog.OnDateSetListener, View.OnClickListener
 {
