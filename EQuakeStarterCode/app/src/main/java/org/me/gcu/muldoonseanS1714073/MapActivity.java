@@ -21,7 +21,7 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
 {
     private GoogleMap map;
 
-    private String[] markerIDs;
+    private String[] markerIDs; // Array of marker IDs is used to determine the right earthquake data to show when a pin is clicked
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +36,8 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
     }
 
     @Override
-    public void onAsyncTaskComplete() {
+    public void onAsyncTaskComplete() {}
 
-    }
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
@@ -56,8 +45,9 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
 
         List<Earthquake> earthquakeList = EarthquakeData.getEarthquakes();
 
-        markerIDs = new String[earthquakeList.size()];
-        // Add a new marker with the correct colour
+        markerIDs = new String[earthquakeList.size()]; // Initialise the markerIDs array
+
+        // Create a marker at the location with a hue based on the magnitude colour coding
         for (int i = 0; i < earthquakeList.size(); i++) {
             LatLng latLng = new LatLng(earthquakeList.get(i).getLatitude(), earthquakeList.get(i).getLongitude());
             Marker marker = map.addMarker(new MarkerOptions()
@@ -71,6 +61,7 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(centre, Float.parseFloat(getResources().getString(R.string.start_zoom))));
     }
 
+    // When a marker is clicked, cycle through the earthquakes until the corresponding ID is found
     @Override
     public boolean onMarkerClick(final Marker marker) {
         for (int i = 0; i < EarthquakeData.getEarthquakes().size(); i++) {

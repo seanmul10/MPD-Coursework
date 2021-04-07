@@ -6,6 +6,7 @@ package org.me.gcu.muldoonseanS1714073;
 
 import android.view.View;
 
+// Interface created to make sure recycler adapters can use the view and position of a clicked item
 public interface RecyclerClickListener
 {
     void onRecyclerItemClicked(View view, int position);

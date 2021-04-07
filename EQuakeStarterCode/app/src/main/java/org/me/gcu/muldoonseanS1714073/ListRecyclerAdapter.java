@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+// Adapter used in the list view (main) activity
 public class ListRecyclerAdapter extends RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder> {
 
     private static RecyclerClickListener clickListener;

@@ -29,8 +29,9 @@ import java.util.List;
 
 public abstract class EarthquakeActivity extends FragmentActivity {
 
-    private final String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml";
-    private final int updateDelay = 300000;
+    private final String urlSource="http://quakes.bgs.ac.uk/feeds/MhSeismology.xml"; // Url for the data feed
+
+    private final int updateDelay = 300000; // The length of delay in milliseconds between each attempt to retrieve the earthquake data
 
     private static boolean isDataParsed = false; // Ensures the data isn't tried to be parsed again needlessly
 
@@ -56,6 +57,7 @@ public abstract class EarthquakeActivity extends FragmentActivity {
     {
         super.onCreate(savedInstanceState);
 
+        // Create the navigation menu at the bottom of the screen
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.menuFragmentPlaceholder, new MenuFragment());
         fragmentTransaction.commit();
@@ -65,6 +67,7 @@ public abstract class EarthquakeActivity extends FragmentActivity {
     protected void onStart() {
         super.onStart();
 
+        // This will make sure when an activity is started, it will not always try to retrieve the data needlessly
         if (isDataParsed) {
             onAsyncTaskComplete();
         }
@@ -73,6 +76,7 @@ public abstract class EarthquakeActivity extends FragmentActivity {
         }
     }
 
+    // Starts the detailed view activity for an individual earthquake
     public void startDetailedViewActivity(int index) {
         Intent intent = new Intent(this, DetailedEarthquakeActivity.class);
         intent.putExtra("earthquakeIndex", index);
@@ -85,14 +89,16 @@ public abstract class EarthquakeActivity extends FragmentActivity {
         return (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
+    // All activities will use this method to update any UI elements once the date has been retrieved
     public abstract void onAsyncTaskComplete();
 
-    // Standard method used to get and display earthquake data
+    // Starts the async task
     public void startTask() {
         AsyncGetDataTask aSyncTask = new AsyncGetDataTask();
         aSyncTask.execute(urlSource);
     }
 
+    // Async class used to get the earthquake data from the feed on a background thread
     private class AsyncGetDataTask extends android.os.AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
@@ -118,7 +124,7 @@ public abstract class EarthquakeActivity extends FragmentActivity {
             catch (IOException e)
             {
                 e.printStackTrace();
-                Log.e("Threading", "Error retrieving data from url source: " + params[0]);
+                Log.e("InternetConnection", "Error retrieving data from url source: " + params[0]);
             }
 
             return rawData;
@@ -133,14 +139,16 @@ public abstract class EarthquakeActivity extends FragmentActivity {
             isDataParsed = true;
         }
 
-        // Takes raw data as an input and returns an array of earthquakes
-        private void parseData(String data)  {
+        // Takes raw data as an input and updates the EarthquakeData class
+        private void parseData(String data)
+        {
             // List used to temporarily store the earthquakes
             List<Earthquake> earthquakeList = new ArrayList<Earthquake>();
             String lastBuildDate = "No build date found";
 
             // Set up PullParser factory and pass it the raw data
             XmlPullParserFactory factory = null;
+            Log.d("Parsing", "Began parsing data feed.");
             try {
                 factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(true);
@@ -153,9 +161,7 @@ public abstract class EarthquakeActivity extends FragmentActivity {
                 while (e != XmlPullParser.END_DOCUMENT) {
                     switch (e) {
                         case XmlPullParser.START_TAG:
-                            Log.d("Parsing", "START TAG " + xpp.getName());
                             if (xpp.getName().equals("item")) {
-                                Log.d("Parsing", "Starting new earthquake");
                                 currentEarthquake = new Earthquake();
                             }
                             else if (xpp.getName().equals("description")) {
@@ -181,7 +187,6 @@ public abstract class EarthquakeActivity extends FragmentActivity {
                                     currentEarthquake.setLatLng(Float.parseFloat(latLong[0]), Float.parseFloat(latLong[1]));
                                     currentEarthquake.setDepth(Integer.parseInt(desc[7].trim().substring(0, desc[7].trim().length() - 2).trim()));
                                     currentEarthquake.setMagnitude(Float.parseFloat(desc[9].trim()));
-                                    Log.d("Parsing", "Parsed earthquake data");
                                 }
                             }
                             else if (xpp.getName().equals("lastBuildDate")) {
@@ -192,7 +197,6 @@ public abstract class EarthquakeActivity extends FragmentActivity {
                         case XmlPullParser.END_TAG:
                             if (xpp.getName().equals("item")) {
                                 earthquakeList.add(currentEarthquake);
-                                Log.d("Parsing", "Added new earthquake");
                             }
                             break;
                     }
@@ -200,9 +204,10 @@ public abstract class EarthquakeActivity extends FragmentActivity {
                 }
             }
             catch (XmlPullParserException | IOException e) {
+                Log.e("Parsing", "Error parsing data feed. EarthquakeData will be updated with default values.");
                 e.printStackTrace();
             }
-            Log.d("Parsing", "Finished parsing document");
+            Log.d("Parsing", "Data feed parsed successfully. Updating EarthquakeData.");
 
             EarthquakeData.setEarthquakes(earthquakeList);
             EarthquakeData.setLastBuildDate(lastBuildDate);

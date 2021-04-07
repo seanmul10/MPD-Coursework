@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+// Adapter used in the search by date activity
 public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAdapter.ViewHolder> {
 
     private static RecyclerClickListener clickListener;
@@ -123,6 +124,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
     }
 
     // Return the size of your dataset (invoked by the layout manager)
+    // This will always be 7
     @Override
     public int getItemCount() {
         return 7;

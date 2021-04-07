@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+// Empty fragment, its use is to be swapped in and out with the SearchResultsFragment
+// At the start of the SearchByDateActivity and when no earthquake data can be found, this fragment will be used
 public class EmptyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {

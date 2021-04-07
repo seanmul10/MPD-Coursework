@@ -10,28 +10,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EarthquakeData {
-    private static List<Earthquake> _earthquakes = new ArrayList<Earthquake>();
-    private static String _lastBuildDate = "";
+    private static List<Earthquake> earthquakes = new ArrayList<Earthquake>();
+    private static String lastBuildDate = "";
 
+    // Used by the parseData method to update the earthquake list
     public static void setEarthquakes(List<Earthquake> earthquakes) {
-        _earthquakes = earthquakes;
+        EarthquakeData.earthquakes = earthquakes;
     }
 
+    // Used by the parseData method to update the date and time of the last build date
     public static void setLastBuildDate(String lastBuildDate) {
-        _lastBuildDate = lastBuildDate;
+        EarthquakeData.lastBuildDate = lastBuildDate;
     }
 
     public static List<Earthquake> getEarthquakes() {
-        return _earthquakes;
+        return earthquakes;
     }
 
     public static String getLastBuildDate() {
-        return _lastBuildDate;
+        return lastBuildDate;
     }
 
+    // Returns the index of an array in the earthquake list
     public static int getEarthquakeIndex(Earthquake earthquake) {
-        for (int i = 0; i < _earthquakes.size(); i++) {
-            if (earthquake == _earthquakes.get(i)) {
+        for (int i = 0; i < earthquakes.size(); i++) {
+            if (earthquake == earthquakes.get(i)) {
                 return i;
             }
         }
@@ -42,15 +45,15 @@ public class EarthquakeData {
     public static void sort(SortMode sortMode) {
         boolean isSorted = false;
         while (!isSorted) {
-            for (int i = 0; i < _earthquakes.size() - 1; i++) {
-                if (compareForSorting(_earthquakes.get(i), _earthquakes.get(i + 1), sortMode)) {
-                    Earthquake swap = _earthquakes.get(i);
-                    _earthquakes.set(i, _earthquakes.get(i + 1));
-                    _earthquakes.set(i + 1, swap);
+            for (int i = 0; i < earthquakes.size() - 1; i++) {
+                if (compareForSorting(earthquakes.get(i), earthquakes.get(i + 1), sortMode)) {
+                    Earthquake swap = earthquakes.get(i);
+                    earthquakes.set(i, earthquakes.get(i + 1));
+                    earthquakes.set(i + 1, swap);
                     Log.d("Sorting", "Swapped elements at positions: " + i + " & " + (i + 1));
                     break;
                 }
-                if (i == _earthquakes.size() - 2) {
+                if (i == earthquakes.size() - 2) {
                     isSorted = true;
                 }
             }
@@ -80,21 +83,19 @@ public class EarthquakeData {
         return false;
     }
 
+    // Returns a new list of earthquakes within a range of two dates
     public static List<Earthquake> getEarthquakesInRange(String earliestDate, String latestDate)
     {
         List<Earthquake> earthquakesInRange = new ArrayList<Earthquake>();
-        for (int i = 0; i < _earthquakes.size(); i++) {
-            String date = _earthquakes.get(i).getComparableDate();
-            Log.d("DateSearch", "Earthquake search: " + _earthquakes.get(i).getLocation() + " - " + earliestDate + " > " +  _earthquakes.get(i).getComparableDate() + " < " + latestDate);
-            Log.d("DateSearch", "Compared to start date: " + date.compareToIgnoreCase(earliestDate) + ", Compare to end date: " + date.compareToIgnoreCase(latestDate));
-            if (date.compareToIgnoreCase(earliestDate) >= 0 &&
-                    date.compareToIgnoreCase(latestDate) <= 0)
-                earthquakesInRange.add(_earthquakes.get(i));
+        for (int i = 0; i < earthquakes.size(); i++) {
+            String date = earthquakes.get(i).getComparableDate();
+            if (date.compareToIgnoreCase(earliestDate) >= 0 && date.compareToIgnoreCase(latestDate) <= 0)
+                earthquakesInRange.add(earthquakes.get(i));
         }
         return earthquakesInRange;
     }
 
-    // Returns the most northern-most earthquake
+    // Returns the northern-most earthquake
     public static Earthquake getMostNorthernEarthquake(List<Earthquake> earthquakes)
     {
         float maxLat = -90f;
@@ -199,7 +200,7 @@ public class EarthquakeData {
     // Returns the earthquake with the lowest depth
     public static Earthquake getDeepestEarthquake(List<Earthquake> earthquakes)
     {
-        int maxDepth = 0;
+        int maxDepth = -1000;
         int resultIndex = -1;
         for (int i = 0; i < earthquakes.size(); i++) {
             int currentLat = earthquakes.get(i).getDepth();

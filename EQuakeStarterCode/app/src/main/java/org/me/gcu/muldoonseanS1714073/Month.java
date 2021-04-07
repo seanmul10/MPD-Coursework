@@ -6,6 +6,7 @@ package org.me.gcu.muldoonseanS1714073;
 
 import android.util.Log;
 
+// Enum for using the full name of each month
 public enum Month
 {
     NULL, JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;
@@ -14,6 +15,7 @@ public enum Month
         return name().charAt(0) + name().substring(1).toLowerCase();
     }
 
+    // Returns the full name of a month using its first 3 letters
     public static Month getMonth(String month) {
         switch (month) {
             case "Jan":
@@ -42,7 +44,7 @@ public enum Month
                 return Month.DECEMBER;
             default:
                 Log.e("Error", "Invalid month, must be in the format Jan, Feb, Mar etc.");
-                return Month.NULL; // Default value is january
+                return Month.NULL;
         }
     }
 }

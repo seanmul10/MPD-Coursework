@@ -44,6 +44,7 @@ public class SearchResultsFragment extends Fragment implements RecyclerClickList
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        // If two dates have aleady been used to search, restore these dates
         if (savedInstanceState != null) {
             startDate = savedInstanceState.getString("startDate");
             endDate = savedInstanceState.getString("endDate");
@@ -56,7 +57,7 @@ public class SearchResultsFragment extends Fragment implements RecyclerClickList
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerAdapter);
 
-        update();
+        updateResultsMessage();
     }
 
     @Override
@@ -65,7 +66,8 @@ public class SearchResultsFragment extends Fragment implements RecyclerClickList
         activity.startDetailedViewActivity(index);
     }
 
-    public void update() {
+    // Shows how many earthquakes were found in the given range
+    public void updateResultsMessage() {
         List<Earthquake> earthquakes = EarthquakeData.getEarthquakesInRange(startDate, endDate);
 
         searchResultsText.setText("Search returned " + earthquakes.size() + " earthquake(s) in the range of dates entered.");

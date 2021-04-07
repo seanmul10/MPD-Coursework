@@ -58,7 +58,7 @@ Mobile Platform Development coursework submission -->
                     android:text="Location"
                     style="@style/ItemMainText"
                     android:textSize="22sp"
-                    android:paddingVertical="20dp">
+                    android:paddingVertical="10dp">
                 </TextView>
             </RelativeLayout>
             <fragment

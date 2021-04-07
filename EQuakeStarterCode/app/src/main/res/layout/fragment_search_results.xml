@@ -12,7 +12,7 @@ Mobile Platform Development coursework submission -->
         android:id="@+id/searchResults"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="5dp"
+        android:padding="5dp"
         style="@style/ItemSubText">
     </TextView>
     <androidx.recyclerview.widget.RecyclerView

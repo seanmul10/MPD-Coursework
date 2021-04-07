@@ -51,6 +51,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener
         if (view == mapButton) {
             intent = new Intent(getActivity(), MapActivity.class);
         }
+        // Start the correct activity
         if (intent != null)
             startActivity(intent);
     }

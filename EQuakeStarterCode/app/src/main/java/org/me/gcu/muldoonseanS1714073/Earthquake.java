@@ -56,7 +56,7 @@ public class Earthquake
         this.day = day;
     }
 
-    // Getter and setter for the month
+    // Getters and setter for the month
     public String getMonth() {
         return month.toString();
     }
@@ -81,7 +81,7 @@ public class Earthquake
         this.time = time;
     }
 
-    // Getter and setter for the latitude and longitude
+    // Getters and setter for the latitude and longitude
     public float[] getLatLng() {
         return new float[] { latitude, longitude };
     }
@@ -111,6 +111,7 @@ public class Earthquake
     }
 
     // Additional data retrieval methods
+
     public String getDate() {
         String ordinal;
         if (day > 3 && day < 21) // All dates between 4th and 20th end in "th"

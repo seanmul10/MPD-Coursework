@@ -4,6 +4,7 @@
 
 package org.me.gcu.muldoonseanS1714073;
 
+// Each sorting method used in the list view activity
 public enum SortMode {
     MAGNITUDE_ASCENDING, MAGNITUDE_DESCENDING, DATE_ASCENDING, DATE_DESCENDING, ALPHABETICAL_ASCENDING, ALPHABETICAL_DESCENDING, DEPTH_ASCENDING, DEPTH_DESCENDING;
 
@@ -25,7 +26,7 @@ public enum SortMode {
                 return SortMode.DEPTH_ASCENDING;
             case 0:
             default:
-                return SortMode.DATE_DESCENDING;
+                return SortMode.DATE_DESCENDING; // By default, the list should be sorted by date descending
         }
     }
 }

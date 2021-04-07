@@ -10,12 +10,13 @@ import android.util.Log;
 
 public class MagnitudeColourCoding
 {
-    public static float minRange = 0f;
-    public static float maxRange = 4f;
+    // Minimum and maximum values for earthquake magnitudes; magnitudes outside this range will be clamped
+    private final static float minRange = 0f;
+    private final static float maxRange = 4f;
 
     // Colour values for the colour gradient used to colour code earthquakes by magnitude
     private static String[] coloursLight = new String[] {
-            "#ffffff", "#deffd1", "#feffba", "#ffc7b2", "#ff8282"
+            "#ccf3fb", "#aaff89", "#fbfe77", "#ff9a60", "#f96464"
     };
 
     // Colour values for the colour gradient used to colour code earthquakes by magnitude in dark mode
@@ -34,8 +35,10 @@ public class MagnitudeColourCoding
     // Context is required for checking if the device is in night mode
     public static String getColour(float magnitude, Context context)
     {
+        // Choose the colour gradient based on the devices night mode setting
         String[] colours = EarthquakeActivity.isDarkMode(context) ? coloursDark : coloursLight;
 
+        // Get the magnitude in a scale from 0 - 1, clamping the magnitude value if necessary
         float magNormalised = (magnitude - minRange) / (maxRange - minRange);
         if (magNormalised < 0f)
             magNormalised = 0f;
@@ -45,15 +48,12 @@ public class MagnitudeColourCoding
         for (int i = times.length - 1; i >= 0; i--) {
             if (magNormalised > times[i]) {
                 int[] rgb1 = hexToRgb(colours[i]);
-                //Log.d("Colours", "rgb1: " + rgb1[0] + ", " + rgb1[1] + ", " + rgb1[2]);
                 int[] rgb2 = hexToRgb(colours[i + 1]);
-                //Log.d("Colours", "rgb2: " + rgb2[0] + ", " + rgb2[1] + ", " + rgb2[2]);
                 int[] lerpedColour = lerpColour(rgb1[0], rgb1[1], rgb1[2], rgb2[0], rgb2[1], rgb2[2], (magNormalised - times[i]) / (times[i + 1] - times[i]));
-                //Log.d("Colours", rgbToHex(lerpedColour[0], lerpedColour[1], lerpedColour[2]));
                 return rgbToHex(lerpedColour[0], lerpedColour[1], lerpedColour[2]);
             }
         }
-        //Log.e("Colours", "Could not retrieve colour for the magnitude of " + magnitude);
+        Log.e("Colours", "Could not retrieve colour for the magnitude of " + magnitude);
         return "#ffffff";
     }
 
