@@ -54,6 +54,10 @@ public class DetailedEarthquakeActivity extends EarthquakeActivity implements On
     }
 
     @Override
+    public void onAsyncTaskStarted() {
+    }
+
+    @Override
     public void onAsyncTaskComplete() {
         locationText.setText(earthquake.getLocation());
         magnitudeText.setText("Magnitude: " + earthquake.getMagnitude());

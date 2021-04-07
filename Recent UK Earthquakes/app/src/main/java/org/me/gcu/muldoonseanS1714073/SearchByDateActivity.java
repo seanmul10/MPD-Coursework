@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SearchByDateActivity extends EarthquakeActivity implements DatePickerDialog.OnDateSetListener, View.OnClickListener
@@ -94,8 +95,14 @@ public class SearchByDateActivity extends EarthquakeActivity implements DatePick
     }
 
     @Override
+    public void onAsyncTaskStarted() {
+        lastBuildDate.setText(getResources().getString(R.string.build_date) + getResources().getString(R.string.refreshing_message));
+    }
+
+
+    @Override
     public void onAsyncTaskComplete() {
-        lastBuildDate.setText("Earthquake data correct as of " + EarthquakeData.getLastBuildDate());
+        lastBuildDate.setText(getResources().getString(R.string.build_date) + " " +  EarthquakeData.getLastBuildDate());
     }
 
     @Override

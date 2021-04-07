@@ -89,7 +89,10 @@ public abstract class EarthquakeActivity extends FragmentActivity {
         return (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
-    // All activities will use this method to update any UI elements once the date has been retrieved
+    // All activities will need this method to update any UI elements before the data has been retrieved
+    public abstract void onAsyncTaskStarted();
+
+    // All activities will need this method to update any UI elements once the data has been retrieved
     public abstract void onAsyncTaskComplete();
 
     // Starts the async task
@@ -103,6 +106,7 @@ public abstract class EarthquakeActivity extends FragmentActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            onAsyncTaskStarted();
         }
 
         @Override

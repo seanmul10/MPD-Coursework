@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends EarthquakeActivity implements OnClickListener, AdapterView.OnItemSelectedListener, RecyclerClickListener
 {
     private ListRecyclerAdapter recyclerAdapter;
@@ -53,6 +55,11 @@ public class MainActivity extends EarthquakeActivity implements OnClickListener,
         recyclerView.setAdapter(recyclerAdapter);
 
         lastBuildDateText = (TextView)findViewById(R.id.buildDate);
+    }
+
+    @Override
+    public void onAsyncTaskStarted() {
+        lastBuildDateText.setText(getResources().getString(R.string.build_date) + getResources().getString(R.string.refreshing_message));
     }
 
     @Override

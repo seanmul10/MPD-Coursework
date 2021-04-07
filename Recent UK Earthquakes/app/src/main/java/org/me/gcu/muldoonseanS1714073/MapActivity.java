@@ -36,6 +36,9 @@ public class MapActivity extends EarthquakeActivity implements OnMapReadyCallbac
     }
 
     @Override
+    public void onAsyncTaskStarted() {}
+
+    @Override
     public void onAsyncTaskComplete() {}
 
     @Override

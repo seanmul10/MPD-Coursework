@@ -8,6 +8,7 @@ Mobile Platform Development coursework submission -->
     <string name="map_view_button">Map View</string>
     <string name="acknowledgement">Contains British Geological Survey materials © NERC 2021</string>
     <string name="build_date">Earthquake data accurate as of </string>
+    <string name="refreshing_message">Retrieving data from source...</string>
     <string name="recycler_view_location">Earthquake</string>
     <string name="recycler_view_magnitude">Magnitude</string>
     <string name="recycler_view_depth">Depth</string>
